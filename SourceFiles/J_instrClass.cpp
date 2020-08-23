@@ -22,6 +22,6 @@ std::string J_Instructions::getAddress() const
     return J_Instructions::address.to_string();
 }
 
- std::string J_Instructions::MachineCodeString(machineFormat ) const  {
+ std::string J_Instructions::MachineCodeString(machineFormat some ) const  {
      return Instructions::MachineCodeString(machineFormat::Binary) + J_Instructions::address.to_string();
 }

@@ -17,7 +17,7 @@ class Instructions {
 
     const std::map < std::string, std::pair <int, int > > varInstr 
     {
-        {"add", {1, 97}}, 
+        {"add", {1, 12}}, 
         {"sub", {1, 29}}, 
 
     }; 

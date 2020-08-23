@@ -11,6 +11,9 @@
 				"${workspaceFolder}\\SourceFiles\\Instr_BaseClass.cpp",
 				"${workspaceFolder}\\SourceFiles\\J_instrClass.cpp",
 				"${workspaceFolder}\\SourceFiles\\main.cpp",
+				"${workspaceFolder}\\SourceFiles\\RI_instrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\R_instrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\I_instrClass.cpp",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],

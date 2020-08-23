@@ -1,6 +1,6 @@
-#include "../Headers/Instr_BaseClass.hpp"
+#include "../Headers/RI_instrClass.hpp"
 
-class R_Instruction : public Instructions{
+class R_Instruction : public RI_Instruction{
 
     private:
         std::bitset<5> rd;
@@ -8,14 +8,14 @@ class R_Instruction : public Instructions{
         std::bitset<6> funct;
         const std::map< std::string, int> R_op_To_Funct = 
         {
-            {"add", 90},
+            {"add", 56},
             {"sub", 20}
         }; 
     
     public: 
         //Constructors and Destructors
         R_Instruction();
-        R_Instruction(const std::string op, const int &, const int &);
+        R_Instruction(const std::string &, const int &, const int &, const int &, const int &);
         virtual ~R_Instruction() = default;
     //-----------------------------------
          // accessors and mutators for rs

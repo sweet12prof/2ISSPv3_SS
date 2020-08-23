@@ -1,7 +1,8 @@
 #include <iostream>
 #include <map>
 #include <iterator>
-#include "../Headers/J_instrClass.hpp"
+#include "../Headers/I_instrClass.hpp"
+
 int main(){
     // const std::map < std::string, std::pair <int, std::string > > varInstr 
     //     {
@@ -19,10 +20,14 @@ int main(){
     
     
         std::string op{"add"};
-        int adr {20};
-       J_Instructions someJ {op, adr};
+        int rs {20};
+        int rt{5};
+        int rd{31};
+        int shamt{5};
+        int Immediate(25089);
+         I_Instruction someJ {op, rs, rt, Immediate};
          Instructions * J_Instrptr = & someJ;
          std::cout <<  (int)J_Instrptr->getInstrType() << std::endl;
-         std::cout << J_Instrptr->MachineCodeString(J_Instructions::machineFormat::Binary);
+         std::cout << J_Instrptr->MachineCodeString(I_Instruction::machineFormat::Binary);
     
 }
