@@ -1,5 +1,4 @@
 #include "../Headers/I_instrClass.hpp"
-#include <iostream>
 I_Instruction::I_Instruction(){}
 
 I_Instruction::I_Instruction(const std::string & op, const int & rs, const int & rt, const int & Imm)
@@ -31,7 +30,6 @@ void I_Instruction::setItype_Type(const std::string & op){
     if(p == I_Type_Types.end())
         throw std::invalid_argument("Undefined Opcode specified");
     else {
-            std::cout << "ne dis " << p->second << " op is " << op;
             this->iType_Type = static_cast<I_Instruction::I_Type>(p->second);
     }
         
