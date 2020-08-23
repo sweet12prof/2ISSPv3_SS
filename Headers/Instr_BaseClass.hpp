@@ -18,7 +18,8 @@ class Instructions {
     const std::map < std::string, std::pair <int, int > > varInstr 
     {
         {"add", {1, 12}}, 
-        {"sub", {1, 29}}, 
+        {"sub", {1, 29}},
+        {"addi", {1, 25}}
 
     }; 
   
@@ -32,6 +33,7 @@ class Instructions {
         explicit Instructions(const std::string &);
         Instructions();
         virtual  ~Instructions() = default;
+        
         //accessor and mutator functions
         std::string getOpcode() const; 
         void setOpcode(const std::string &);
@@ -41,7 +43,8 @@ class Instructions {
         
         // static machine Code Format to specify MC format 
         static machineFormat mcFormat;
-        static InstrType Type;
+                // static InstrType Type;
+        
         //virtual Function To generate MachineCode
         virtual std::string MachineCodeString(machineFormat ) const;
     
