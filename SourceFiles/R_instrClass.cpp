@@ -50,6 +50,15 @@ R_Instruction::R_Instruction(const std::string & op, const int & rs, const int &
 
 
 std::string R_Instruction::MachineCodeString(Instructions::machineFormat some) const {
-    return RI_Instruction::MachineCodeString(machineFormat::Binary) + R_Instruction::getRd() +  R_Instruction::getShamt() + R_Instruction::getFunct(); 
+    std::string returnString = RI_Instruction::MachineCodeString(machineFormat::Binary) + R_Instruction::getRd() +  R_Instruction::getShamt() + R_Instruction::getFunct(); 
+    if(some == machineFormat::Binary)
+        return returnString;
+    else {
+           
+            auto p = std::bitset<32>(returnString).to_ulong();
+             std::ostringstream output;
+            output << std::setw(8) << std::hex << std::showbase << std::setfill('0') << p;
+            return output.str();   
+    }
 };
 

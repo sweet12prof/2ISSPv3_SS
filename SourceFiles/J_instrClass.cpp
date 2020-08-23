@@ -23,5 +23,15 @@ std::string J_Instructions::getAddress() const
 }
 
  std::string J_Instructions::MachineCodeString(machineFormat some ) const  {
-     return Instructions::MachineCodeString(machineFormat::Binary) + J_Instructions::address.to_string();
+     std::string returnString {Instructions::MachineCodeString(machineFormat::Binary) + J_Instructions::address.to_string()};
+
+
+      if(some == Instructions::machineFormat::Binary)
+            return returnString;
+        else{
+            auto p =std::bitset<32>(returnString).to_ulong();
+            std::ostringstream output;
+            output << std::setw(8) << std::hex << std::showbase << std::setfill('0') << p;
+            return output.str();   
+        } 
 }

@@ -7,19 +7,18 @@
 #include <cmath>
  
 #ifndef BASECLASS_H
-#define BAECLASS_H
-
-
-    
+#define BASECLASS_H
 
 class Instructions {
    
-
+   
     const std::map < std::string, std::pair <int, int > > varInstr 
     {
         {"add", {1, 12}}, 
         {"sub", {1, 29}},
-        {"addi", {1, 25}}
+        {"addi", {2, 25}},
+        {"mfc", {4, 31}},
+        {"J", {3, 21}}
 
     }; 
   
@@ -52,6 +51,8 @@ class Instructions {
          std::bitset<6> Opcode; // Opcode is common to all instructions, thus in base class
          InstrType instrType;
          void setInstrType(const std::string &); // This is defined private because its handled within the object itself ...Mutator for Instruction Type
+
+          friend std::string nopInstruction(machineFormat );  //Friend Function to generate nop instruction whenever needed
 };
 
 #endif

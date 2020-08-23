@@ -1,5 +1,8 @@
 #include "../Headers/RI_instrClass.hpp"
 
+#ifndef R_INSTR_H
+#define R_INSTR_H
+
 class R_Instruction : public RI_Instruction{
 
     private:
@@ -33,3 +36,5 @@ class R_Instruction : public RI_Instruction{
     //-------------------------------------
         virtual std::string MachineCodeString(machineFormat ) const override; // Overide to produce Machine representation of Instruction
 };
+
+#endif

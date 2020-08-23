@@ -21,7 +21,17 @@ std::string I_Instruction::getImmediate() const {
 
 
 std::string I_Instruction::MachineCodeString(machineFormat some) const {
-    return RI_Instruction::MachineCodeString(machineFormat::Binary) + I_Instruction::getImmediate();
+    std::string returnString {RI_Instruction::MachineCodeString(machineFormat::Binary) + I_Instruction::getImmediate()};
+        if(some == Instructions::machineFormat::Binary)
+            return returnString;
+        else{
+            auto p =std::bitset<32>(returnString).to_ulong();
+            std::ostringstream output;
+            output << std::setw(8) << std::hex << std::showbase << std::setfill('0') << p;
+            return output.str();   
+        } 
+            
+    
 }
 
 void I_Instruction::setItype_Type(const std::string & op){
