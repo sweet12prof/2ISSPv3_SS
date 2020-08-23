@@ -8,14 +8,13 @@
 			"args": [
 				"-g",
 				"-std=c++2a",
-				"${workspaceFolder}\\SourceFiles\\Instr_BaseClass.cpp",
-				"${workspaceFolder}\\SourceFiles\\J_instrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\IM_cpp\\Exp_InstrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\IM_cpp\\I_instrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\IM_cpp\\J_instrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\IM_cpp\\R_instrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\IM_cpp\\RI_instrClass.cpp",
+				"${workspaceFolder}\\SourceFiles\\IM_cpp\\Instr_BaseClass.cpp",
 				"${workspaceFolder}\\SourceFiles\\main.cpp",
-				"${workspaceFolder}\\SourceFiles\\RI_instrClass.cpp",
-				"${workspaceFolder}\\SourceFiles\\R_instrClass.cpp",
-				"${workspaceFolder}\\SourceFiles\\I_instrClass.cpp",
-				"${workspaceFolder}\\SourceFiles\\Exp_InstrClass.cpp",
-
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
@@ -25,7 +24,10 @@
 			"problemMatcher": [
 				"$gcc"
 			],
-			"group": "build"
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }

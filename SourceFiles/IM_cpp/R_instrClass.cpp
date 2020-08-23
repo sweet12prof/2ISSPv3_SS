@@ -1,4 +1,4 @@
-#include "../Headers/R_instrClass.hpp"
+#include "../../Headers/IM_hpp/R_instrClass.hpp"
 
 void R_Instruction::setFunct(const std::string & op){
     auto p = R_op_To_Funct.find(op);

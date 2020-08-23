@@ -1,4 +1,4 @@
-#include "../Headers/Instr_BaseClass.hpp"
+#include "./Instr_BaseClass.hpp"
 
 #ifndef J_INSTR_H
 #define J_INSTR_H

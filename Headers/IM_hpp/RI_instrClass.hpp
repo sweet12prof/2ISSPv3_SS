@@ -1,4 +1,4 @@
-#include "../Headers/Instr_BaseClass.hpp"
+#include "./Instr_BaseClass.hpp"
 
 #ifndef RI_INSTR_H
 #define RI_INSTR_H

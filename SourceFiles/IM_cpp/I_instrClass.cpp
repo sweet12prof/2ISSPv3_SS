@@ -1,4 +1,4 @@
-#include "../Headers/I_instrClass.hpp"
+#include "../../Headers/IM_hpp/I_instrClass.hpp"
 I_Instruction::I_Instruction(){}
 
 I_Instruction::I_Instruction(const std::string & op, const int & rs, const int & rt, const int & Imm)

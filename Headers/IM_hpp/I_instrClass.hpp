@@ -1,4 +1,4 @@
-#include "../Headers/RI_instrClass.hpp"
+#include "./RI_instrClass.hpp"
 #include <unordered_map>
 
 #ifndef I_INSTR_H
