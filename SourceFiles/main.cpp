@@ -18,7 +18,8 @@ int main(){
     
         std::string op{"mfc"};
         std::string Rop{"add"};
-        std::string Iop{"addi"};
+        std::string Iop{"beq"};
+        std::string Iop2{"addi"};
         std::string jop{"J"};
         std::string nop{"nop"};
         int rs {20};
@@ -30,12 +31,12 @@ int main(){
 
         R_Instruction R_Instr{Rop, rs, rt, rd, shamt};
         R_Instruction R_Instr2{Rop, rs, rd, rt, shamt};
-        I_Instruction I_Instr{Iop, rs, rt, Immediate};
+        I_Instruction I_Instr{Iop2, rs, rd, Immediate};
         J_Instructions J_Instr{jop, adr};
         Exp_Instructions Exp_Instr{op, rt, rd};
         
 
-        Scheduler Schd{&R_Instr, &R_Instr2};
+        Scheduler Schd{&R_Instr, &I_Instr};
 
         
 
