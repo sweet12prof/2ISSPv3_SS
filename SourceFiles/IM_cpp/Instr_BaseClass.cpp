@@ -5,6 +5,7 @@
  Instructions::Instructions(const std::string & opCode){
     Instructions::setOpcode(opCode);
     Instructions::setInstrType(opCode);
+
 }
 
 Instructions::InstrType Instructions::getInstrType() const{
@@ -38,5 +39,10 @@ std::string Instructions::getOpcode() const {
 std::string Instructions::MachineCodeString(machineFormat some) const {
     return getOpcode();
 }
+
+
+
+    
+    
 
 
