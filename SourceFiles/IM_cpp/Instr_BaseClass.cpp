@@ -41,6 +41,25 @@ std::string Instructions::MachineCodeString(machineFormat some) const {
 }
 
 
+std::string Instructions::nopInstruction(Instructions::machineFormat some){
+    std::bitset<32>returnVal(0);
+    if(some == Instructions::machineFormat::Binary){
+      
+        return returnVal.to_string();
+    }
+        
+    else  
+        {
+            auto p = returnVal.to_ulong();
+            std::ostringstream output;
+            output << std::setw(8) << std::hex << std::showbase << std::setfill('0') << p;
+             
+            return "0x" + output.str();  
+        }
+
+
+       // output << std::setw(8) << std::hex << std::showbase << std::setfill('0') << p;
+}
 
     
     

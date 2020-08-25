@@ -43,16 +43,17 @@ class Instructions {
                       
         //virtual Function To generate MachineCode
             virtual std::string MachineCodeString(machineFormat ) const;
-
-        //static Function to return enum type of an object without creating object
-        friend int getInstructionType( const std::string &);
+            static std::string nopInstruction(machineFormat );
+        
+       
+        
     
     private: 
          std::bitset<6> Opcode; // Opcode is common to all instructions, thus in base class
          InstrType instrType;
          void setInstrType(const std::string &); // This is defined private because its handled within the object itself ...Mutator for Instruction Type
 
-          friend std::string nopInstruction(machineFormat );  //Friend Function to generate nop instruction whenever needed
+            //Friend Function to generate nop instruction whenever needed
 };
 
 #endif

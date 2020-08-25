@@ -36,7 +36,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${vcpkgRoot}/x86-windows/include",
-                "${workspaceFolder}/Headers/IM_hpp"
+                "${workspaceFolder}/Headers/IM_hpp",
+                "${workspaceFolder}/Headers/Scheduler_hpp"
             ],
             "defines": [
                 "_DEBUG",

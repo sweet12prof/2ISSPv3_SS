@@ -1,5 +1,6 @@
 #include "../../Headers/Scheduler_hpp/Scheduler.hpp"
 
+
 std::vector<std::string> Scheduler::R_asInstr_1(){
     R_Instruction * Instr1_derivedPtr = dynamic_cast<R_Instruction *>(Instrpair.first); 
     std::vector<std::string> result;
@@ -13,7 +14,7 @@ std::vector<std::string> Scheduler::R_asInstr_1(){
                         (Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRd()) )
                     result = std::vector<std::string>{
                                 Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                nopInstruction(Instructions::machineFormat::Decimal), 
+                                Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
                                 Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
                             };
                 else 
@@ -36,7 +37,7 @@ std::vector<std::string> Scheduler::R_asInstr_1(){
                             
                            result = std::vector<std::string>{
                                         Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                        nopInstruction(Instructions::machineFormat::Decimal), 
+                                        Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
                                         Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
                                     };
                         else 
@@ -51,7 +52,7 @@ std::vector<std::string> Scheduler::R_asInstr_1(){
                         if(Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRs() || Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRt())
                             result = std::vector<std::string>{
                                     Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                    nopInstruction(Instructions::machineFormat::Decimal), 
+                                    Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
                                     Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
                                 };          
                         else 
@@ -64,7 +65,7 @@ std::vector<std::string> Scheduler::R_asInstr_1(){
                     default: 
                            result = std::vector<std::string>{
                                         Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                        nopInstruction(Instructions::machineFormat::Decimal), 
+                                        Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
                                         Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
                                     };
                 }
@@ -83,8 +84,8 @@ std::vector<std::string> Scheduler::R_asInstr_1(){
          default: 
                 result = std::vector<std::string>{
                                 Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                nopInstruction(Instructions::machineFormat::Decimal),  
-                                nopInstruction(Instructions::machineFormat::Decimal)
+                                Instructions::nopInstruction(Instructions::machineFormat::Decimal),  
+                                Instructions::nopInstruction(Instructions::machineFormat::Decimal)
                             };
             break;
     }
