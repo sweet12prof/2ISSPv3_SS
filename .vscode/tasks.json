@@ -15,7 +15,9 @@
 				"${workspaceFolder}\\SourceFiles\\IM_cpp\\RI_instrClass.cpp",
 				"${workspaceFolder}\\SourceFiles\\IM_cpp\\Instr_BaseClass.cpp",
 				"${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\Scheduler.cpp",
-				"${workspaceFolder}\\SourceFiles\\main.cpp",
+				"${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\I_asInstr_1.cpp",
+				"${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\R_as_Instr1.cpp",
+				//"${workspaceFolder}SourceFiles\Scheduler_cpp\_as_Instr_\R_as_Instr1.cpp",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
