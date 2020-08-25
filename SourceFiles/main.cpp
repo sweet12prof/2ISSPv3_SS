@@ -7,7 +7,7 @@ int main(){
         std::string op{"mfc"};
         std::string Rop{"add"};
         std::string Iop{"beq"};
-        std::string Iop2{"addi"};
+        std::string Iop2{"lw"};
         std::string jop{"J"};
         std::string nop{"nop"};
         int rs {20};
@@ -17,17 +17,17 @@ int main(){
         int Immediate(25089);
         int adr{24502};
 
-        R_Instruction R_Instr{Rop, rs, rt, rd, shamt};
+        R_Instruction R_Instr{Rop, rs, rd, rd, shamt};
         //R_Instruction R_Instr2{Rop, rs, rd, rt, shamt};
         
-        I_Instruction I_Instr{Iop, rs, rt, Immediate};
+        I_Instruction I_Instr{Iop2, rs, rt, Immediate};
         
         J_Instructions J_Instr{jop, adr};
         
         Exp_Instructions Exp_Instr{op, rt, rd};
         
 
-        Scheduler Schd{ &I_Instr, &R_Instr};
+        Scheduler Schd{ &J_Instr,  &I_Instr};
 
         
 
