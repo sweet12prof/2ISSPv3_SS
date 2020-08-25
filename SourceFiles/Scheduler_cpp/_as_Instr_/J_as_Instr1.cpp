@@ -1,0 +1,50 @@
+#include "../../../Headers/Scheduler_hpp/Scheduler.hpp"
+  std::vector<std::string> Scheduler::J_asInstr_1(){
+    J_Instructions * Instr1_derivedPtr = dynamic_cast <J_Instructions *> (Scheduler::Instrpair.first);
+    
+    std::vector<std::string> result;
+        
+        switch(Scheduler::Instrpair.second->getInstrType()){
+            case Instructions::InstrType::R_Type:{
+                R_Instruction * Instr2_derivedPtr = dynamic_cast<R_Instruction *>(Instrpair.second); 
+                result = std::vector<std::string>{
+                    Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal),
+                    Instructions::nopInstruction(Instructions::machineFormat::Decimal),
+                    Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                }; }
+            break;
+
+            case Instructions::InstrType::J_Type:
+            {
+                J_Instructions * Instr2_derivedPtr = dynamic_cast<J_Instructions *>(Instrpair.second); 
+                result = std::vector<std::string>{
+                    Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal),
+                    Instructions::nopInstruction(Instructions::machineFormat::Decimal),
+                    Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                };
+            }
+            break;
+
+            case Instructions::InstrType::I_Type:{
+                I_Instruction * Instr2_derivedPtr = dynamic_cast<I_Instruction *>(Instrpair.second);
+
+                result = std::vector<std::string>{
+                    Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal),
+                    Instructions::nopInstruction(Instructions::machineFormat::Decimal),
+                    Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                };}
+            break;
+
+            case Instructions::InstrType::Exp: {
+                I_Instruction * Instr2_derivedPtr = dynamic_cast<I_Instruction *>(Instrpair.second); 
+                    result = std::vector<std::string>{
+                        Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal),
+                        Instructions::nopInstruction(Instructions::machineFormat::Decimal),
+                        Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                    };
+            }
+            break;
+        }
+
+        return result;
+  }

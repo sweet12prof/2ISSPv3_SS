@@ -27,7 +27,7 @@ int main(){
         Exp_Instructions Exp_Instr{op, rt, rd};
         
 
-        Scheduler Schd{ &J_Instr,  &I_Instr};
+        Scheduler Schd{ &Exp_Instr,  &R_Instr};
 
         
 

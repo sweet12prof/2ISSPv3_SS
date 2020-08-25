@@ -33,8 +33,7 @@ std::vector<std::string> Scheduler::schedulePair(){
 }
 
    // This can be found im ./_as_Insr_ directory
-std::vector<std::string> Scheduler::Exp_asInstr_1(){ return 
-            std::vector<std::string>{"1243"};} // This can be found im ./_as_Insr_ directory
+
 std::vector<std::string> Scheduler::nop_Instr(){ return 
             std::vector<std::string>{"1243"};}      // This can be found im ./_as_Insr_ directory
             

@@ -18,6 +18,7 @@
 				"${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\I_asInstr_1.cpp",
 				"${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\R_as_Instr1.cpp",
 				"${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\J_as_Instr1.cpp",
+				"${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\Exp_asInstr_1.cpp",
 				"${workspaceFolder}\\SourceFiles\\main.cpp",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
