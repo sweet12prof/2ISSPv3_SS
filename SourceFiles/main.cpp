@@ -17,7 +17,7 @@ int main(){
         int Immediate(25089);
         int adr{24502};
 
-         R_Instruction R_Instr{Rop, rs, rt, rd, shamt, ""};
+         R_Instruction R_Instr{Rop, rs, rd, rd, shamt, ""};
 
          //std::cout << R_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
          R_Instruction R_Instr2{Rop, rs, rd, rt, shamt, ""};
@@ -26,16 +26,16 @@ int main(){
 
 
         
-         I_Instruction I_Instr{Iop, rs, rt, -9999999, "",  "someLabel"};
+         I_Instruction I_Instr{Iop2, rs, rt, -9999999, "JumpLabel",  "someLabel"};
          //std::cout << I_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
 
-         J_Instructions J_Instr{jop, adr, ""};
+         J_Instructions J_Instr{jop, adr, "", "JumpLabel"};
         
-         Exp_Instructions Exp_Instr{op, rd, rd, ""};
+         Exp_Instructions Exp_Instr{op, 1, 3, ""};
           //std::cout << J_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
 
           //std::cout << Exp_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
-         Scheduler Schd{ &I_Instr,  &R_Instr};
+         Scheduler Schd{ &I_Instr,  &J_Instr};
 
         
 
@@ -43,7 +43,7 @@ int main(){
               std::cout << item << std::endl;
 
 
-        //  std::array <Instructions *, 4> InstrPtr {&R_Instr, &Exp_Instr, &I_Instr, &J_Instr};
+        //  std::array <Instructions *, 4> InstrPtr {&R_Instr, &Exp_Instr, &I_Instr, &J_IJ_Instrnstr};
         //  std::cout << nopInstruction(Instructions::machineFormat::Decimal) << std::endl << std::endl;
 
         // std::cout << "Checking if nop is an Instruction " << getInstructionType(nop) << std::endl; 

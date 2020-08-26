@@ -2,8 +2,8 @@
 
 J_Instructions::J_Instructions(){}
 
-J_Instructions::J_Instructions(const std::string & op, const int & address, const std::string &optionalLabel)
-    : Instructions(op, optionalLabel)
+J_Instructions::J_Instructions(const std::string & op, const int & address, const std::string &optionalLabel, const std::string & jLabelInput)
+    : Instructions(op, optionalLabel), jumpLabel{jLabelInput}
 {
     J_Instructions::setAddress(address);
 }
@@ -32,7 +32,10 @@ std::string J_Instructions::getAddress() const
         {
              std::string someString { Instructions::MachineCodeString(machineFormat::S_tring)};
             std::stringstream output;
-            output << someString << std::dec << std::bitset<26>(J_Instructions::getAddress()).to_ulong();
+            if(J_Instructions::getJumpLabel() == "")
+                output << someString << std::dec << std::bitset<26>(J_Instructions::getAddress()).to_ulong();
+            else 
+                 output << someString << std::dec << " " << J_Instructions::getJumpLabel();
             return output.str();
         }
         else{
@@ -42,3 +45,11 @@ std::string J_Instructions::getAddress() const
             return output.str();   
         } 
 }
+
+    std::string J_Instructions::getJumpLabel() const {
+        return this->jumpLabel;
+    }
+
+    void J_Instructions::setjumpLabel(const std::string & jLabelInput){
+        J_Instructions::jumpLabel = jLabelInput;
+    }
