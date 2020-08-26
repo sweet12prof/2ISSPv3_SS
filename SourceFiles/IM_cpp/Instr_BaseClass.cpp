@@ -92,3 +92,25 @@ void Instructions::setOpcodeString(const std::string & OpcodeString) {
     this->opCodeString = opCodeString;
 }
 
+
+Instructions::InstrType Instructions::getInstrType2(const std::string &someOp){
+     auto p {Instructions::varInstr2.find(someOp)};
+     if(p == Instructions::varInstr2.end())
+        throw std::invalid_argument ("Undefined Operation");
+    else {
+            return (Instructions::InstrType)(p->second).first;
+           
+        }   
+}
+
+
+std::map < std::string, std::pair <int, int > > Instructions::varInstr2 = {
+        {"add", {1, 12}}, 
+        {"sub", {1, 29}},
+        {"addi", {2, 25}},
+        {"mfc", {4, 31}},
+        {"J", {3, 21}}, 
+        {"nop", {6, 0}}, 
+        {"beq", {2, 15}} ,
+        {"lw", {2, 13}}
+    };

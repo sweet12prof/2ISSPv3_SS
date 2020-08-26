@@ -2,7 +2,7 @@
 
 RI_Instruction::RI_Instruction(){}
 
-RI_Instruction::RI_Instruction(const std::string op, const int & rs, const int & rt, const std::string & optionalLabel)
+RI_Instruction::RI_Instruction(const std::string & op, const int & rs, const int & rt, const std::string & optionalLabel)
 : Instructions(op, optionalLabel)
 {
     RI_Instruction::setRs(rs);
