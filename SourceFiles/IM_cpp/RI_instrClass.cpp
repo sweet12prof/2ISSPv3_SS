@@ -2,8 +2,8 @@
 
 RI_Instruction::RI_Instruction(){}
 
-RI_Instruction::RI_Instruction(const std::string op, const int & rs, const int & rt)
-: Instructions(op)
+RI_Instruction::RI_Instruction(const std::string op, const int & rs, const int & rt, const std::string & optionalLabel)
+: Instructions(op, optionalLabel)
 {
     RI_Instruction::setRs(rs);
     RI_Instruction::setRt(rt);
@@ -35,7 +35,16 @@ std::string RI_Instruction::getRt() const {
 }
 
 std::string RI_Instruction::MachineCodeString(machineFormat some) const {
-    return Instructions::MachineCodeString(machineFormat::Binary) + RI_Instruction::getRs() + RI_Instruction::getRt();
+    if(some == machineFormat::S_tring)
+        {
+            std::string someString {Instructions::MachineCodeString(machineFormat::S_tring)};
+            std::stringstream output;
+            output << someString << std::dec << "$"<< std::bitset<5>(RI_Instruction::getRs()).to_ulong() << " "  << "$"<< std::bitset<5> (RI_Instruction::getRt()).to_ulong();
+            return output.str();
+        }
+    else
+        return Instructions::MachineCodeString(machineFormat::Binary) + RI_Instruction::getRs() + RI_Instruction::getRt();
+
 }
 
 

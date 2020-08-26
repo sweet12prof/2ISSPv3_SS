@@ -16,22 +16,22 @@
             if(Instr1_derivedPtr->getRt() == Instr2_derivedPtr->getRs() || Instr1_derivedPtr->getRt() == Instr2_derivedPtr->getRt() || 
                         Instr1_derivedPtr->getRt() == Instr2_derivedPtr->getRd())
                 result =  std::vector<std::string>{
-                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
             else 
                 result = std::vector<std::string>{
-                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal),  
-                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring),  
+                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
                         }; }
         break;
 
         case Instructions::InstrType::J_Type : {
             J_Instructions * Instr2_derivedPtr = dynamic_cast<J_Instructions *>(Instrpair.second);
                 result = std::vector<std::string>{ 
-                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)  
+                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)  
                         }; }
         break;
 
@@ -39,14 +39,14 @@
             Exp_Instructions * Instr2_derivedPtr = dynamic_cast<Exp_Instructions *>(Instrpair.second);
             if( Instr1_derivedPtr->getRt() == Instr2_derivedPtr->getRd() || Instr1_derivedPtr->getRt() == Instr2_derivedPtr->getRd())
                  result =  std::vector<std::string>{
-                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
             else 
                  result = std::vector<std::string>{
-                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal),  
-                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::Decimal)
+                            Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring),  
+                            Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
 
         }
@@ -84,23 +84,23 @@
  std::vector<std::string> Lw_as_I_type_Type(I_Instruction * i1, I_Instruction *i2){
      if(i2->getIType_Type() == I_Instruction::I_Type::Mem_LwType || i2->getIType_Type() == I_Instruction::I_Type::Mem_Sw_Type)
         return  std::vector<std::string>{
-                            i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                            i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
     else if(i2->getIType_Type() == I_Instruction::I_Type::Branch_Type)
             {
                 if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt())
                         return  std::vector<std::string>{ 
-                                i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                                i2->MachineCodeString(Instructions::machineFormat::Decimal) 
+                                i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                i2->MachineCodeString(Instructions::machineFormat::S_tring) 
                             };
                 else
                          return std::vector<std::string>
                          {
-                             i2->MachineCodeString(Instructions::machineFormat::Decimal), 
-                             i1->MachineCodeString(Instructions::machineFormat::Decimal)  
+                             i2->MachineCodeString(Instructions::machineFormat::S_tring), 
+                             i1->MachineCodeString(Instructions::machineFormat::S_tring)  
                         };
         
 
@@ -110,15 +110,15 @@
                 return 
                     std::vector<std::string>
                                     { 
-                                        i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                        Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                                        i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                                        i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                        Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                        i2->MachineCodeString(Instructions::machineFormat::S_tring)
                                     };
         else 
                  return std::vector<std::string>
                          {
-                             i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                             i2->MachineCodeString(Instructions::machineFormat::Decimal)  
+                             i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                             i2->MachineCodeString(Instructions::machineFormat::S_tring)  
                         };
     }
  }
@@ -126,9 +126,9 @@
 
 std::vector<std::string> Beq_as_I_Type_Type(I_Instruction * i1, I_Instruction *i2){
     return std::vector<std::string>{ 
-                                i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                                i2->MachineCodeString(Instructions::machineFormat::Decimal) 
+                                i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                i2->MachineCodeString(Instructions::machineFormat::S_tring) 
                             };   
 }
 
@@ -136,23 +136,23 @@ std::vector<std::string> Beq_as_I_Type_Type(I_Instruction * i1, I_Instruction *i
 std::vector<std::string> sw_as_I_type_Type(I_Instruction *i1, I_Instruction *i2){
      if(i2->getIType_Type() == I_Instruction::I_Type::Mem_LwType || i2->getIType_Type() == I_Instruction::I_Type::Mem_Sw_Type)
         return  std::vector<std::string>{
-                            i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                            i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
      
      else if(i2->getIType_Type() == I_Instruction::I_Type::Branch_Type) 
         return std::vector<std::string>
                          {
-                             i2->MachineCodeString(Instructions::machineFormat::Decimal), 
-                             i1->MachineCodeString(Instructions::machineFormat::Decimal)  
+                             i2->MachineCodeString(Instructions::machineFormat::S_tring), 
+                             i1->MachineCodeString(Instructions::machineFormat::S_tring)  
                         };
     
      else 
          return std::vector<std::string>
                          {
-                             i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                             i2->MachineCodeString(Instructions::machineFormat::Decimal)  
+                             i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                             i2->MachineCodeString(Instructions::machineFormat::S_tring)  
                         };
 }
 
@@ -165,28 +165,28 @@ std::vector<std::string> Imm_as_I_Type_Type(I_Instruction *i1, I_Instruction *i2
         case I_Instruction::I_Type::Imm_Type :
             if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt())
                 result = std::vector<std::string>{
-                            i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                            i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
             else 
                 result = std::vector<std::string>{
-                            i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
 
         case I_Instruction::I_Type::Branch_Type :
                  if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt())
                         result =  std::vector<std::string>{ 
-                                i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                                i2->MachineCodeString(Instructions::machineFormat::Decimal) 
+                                i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                i2->MachineCodeString(Instructions::machineFormat::S_tring) 
                             };
                 else
                          result = std::vector<std::string>
                          {
-                             i2->MachineCodeString(Instructions::machineFormat::Decimal), 
-                             i1->MachineCodeString(Instructions::machineFormat::Decimal)  
+                             i2->MachineCodeString(Instructions::machineFormat::S_tring), 
+                             i1->MachineCodeString(Instructions::machineFormat::S_tring)  
                         };
         break;
                 

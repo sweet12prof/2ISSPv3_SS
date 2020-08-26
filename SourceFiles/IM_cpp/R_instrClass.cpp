@@ -40,8 +40,8 @@ void R_Instruction::setRd(const int & rd){
 
 R_Instruction::R_Instruction() {};
 
-R_Instruction::R_Instruction(const std::string & op, const int & rs, const int & rt, const int & rd, const int & shamt)
-    :RI_Instruction(op, rs, rt)   
+R_Instruction::R_Instruction(const std::string & op, const int & rs, const int & rt, const int & rd, const int & shamt, const std::string & optionalLabel)
+    :RI_Instruction(op, rs, rt, optionalLabel)   
 {
     R_Instruction::setFunct(op);
     R_Instruction::setShamt(shamt);
@@ -53,6 +53,12 @@ std::string R_Instruction::MachineCodeString(Instructions::machineFormat some) c
     std::string returnString = RI_Instruction::MachineCodeString(machineFormat::Binary) + R_Instruction::getRd() +  R_Instruction::getShamt() + R_Instruction::getFunct(); 
     if(some == machineFormat::Binary)
         return returnString;
+    else if (some == machineFormat::S_tring){
+            std::string someString { RI_Instruction::MachineCodeString(machineFormat::S_tring)};
+            std::stringstream output;
+            output << someString << " " << std::dec << "$"<< std::bitset<5>(R_Instruction::getRd()).to_ulong()  << " ";
+            return output.str();
+    }
     else {
            
             auto p = std::bitset<32>(returnString).to_ulong();

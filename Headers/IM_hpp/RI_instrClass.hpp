@@ -12,7 +12,7 @@ class RI_Instruction : public Instructions{
     public: 
         //Constructors and Destructors
         RI_Instruction();
-        RI_Instruction(const std::string op, const int &, const int &);
+        RI_Instruction(const std::string op, const int &, const int &, const std::string &);
         virtual ~RI_Instruction() = default;
     //-----------------------------------
         // accessors and mutators for rs

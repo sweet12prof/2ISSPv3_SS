@@ -18,7 +18,7 @@ class R_Instruction : public RI_Instruction{
     public: 
         //Constructors and Destructors
         R_Instruction();
-        R_Instruction(const std::string &, const int &, const int &, const int &, const int &);
+        R_Instruction(const std::string &, const int &, const int &, const int &, const int &, const std::string &);
         virtual ~R_Instruction() = default;
     //-----------------------------------
          // accessors and mutators for rs

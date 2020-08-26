@@ -27,11 +27,11 @@ class Instructions {
     
     public:
     enum class InstrType{R_Type = 1, I_Type, J_Type, Exp, Undefined, nop};
-    enum class machineFormat { Binary=1, Decimal };
+    enum class machineFormat { Binary=1, Decimal, S_tring };
      
         //Constructor and Destructor
             //Instructions();
-                explicit Instructions(const std::string &);
+                explicit Instructions(const std::string &, const  std::string &);
                 Instructions();
                 virtual  ~Instructions() = default;
         
@@ -45,12 +45,19 @@ class Instructions {
         //virtual Function To generate MachineCode
             virtual std::string MachineCodeString(machineFormat ) const;
             static std::string nopInstruction(machineFormat );
-        
+
+        //Function To set and get Instruction Label(Optional)
+            std::string getLabel() const;
+            void setLabel(const std::string &);
        
-        
-    
+       //Function to set and get opCode String 
+            std::string getopCodeString() const;
+            void setOpcodeString(const std::string &);
+
     private: 
          std::bitset<6> Opcode; // Opcode is common to all instructions, thus in base class
+         std::string opCodeString; // String representation of Opcode String
+         std::string label; //Optional Label For each instruction 
          InstrType instrType;
          void setInstrType(const std::string &); // This is defined private because its handled within the object itself ...Mutator for Instruction Type
 

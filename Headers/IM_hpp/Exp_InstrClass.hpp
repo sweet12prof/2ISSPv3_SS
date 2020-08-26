@@ -22,7 +22,7 @@ public:
 //---------------Constructor and Destructor
     //----------Constructor
         Exp_Instructions();
-        Exp_Instructions(const std::string &, const int &, const int&);
+        Exp_Instructions(const std::string &, const int &, const int&, const std::string &);
         virtual ~Exp_Instructions() = default;
 //-----------ML representation of mfc Instruction
     virtual std::string MachineCodeString(machineFormat ) const override; // Overide to produce Machine representation of Instruction

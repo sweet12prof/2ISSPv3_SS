@@ -20,11 +20,16 @@ class I_Instruction : public RI_Instruction{
 
     //-----------Constructor and Destructor
         I_Instruction();
-        I_Instruction(const std::string &, const int &, const int &, const int &);
+        I_Instruction(const std::string &, const int &, const int &, const int &, const std::string &, const std::string &);
         virtual ~I_Instruction() = default;
 
     //-------------MF to return Machine Code representation
         virtual std::string MachineCodeString(machineFormat ) const override; // Overide to produce Machine representation of Instruction
+
+    //-----------0-MF to access and mutate Immediate Label(private)
+        std::string getImmediateLabel() const;
+        void setImmediateLabel(const std::string &);
+
 
     private:
         const std::unordered_map<std::string, int> I_Type_Types 
@@ -43,7 +48,7 @@ class I_Instruction : public RI_Instruction{
 
         std::bitset<16>Immediate; // Immediate Portion of Instruction
         I_Type iType_Type; // This describes the kind of I-Type instruction an object is;
-
+        std::string ImmediateLabel;
         void setItype_Type(const std::string & ); // sets the Type of Itype Instructions
 
 

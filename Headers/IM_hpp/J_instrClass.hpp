@@ -8,7 +8,7 @@ class J_Instructions : public Instructions {
         std::bitset<26> address; //26 bit address field from instruction
     public:
         J_Instructions(); /// Default Contsructo0r 
-        J_Instructions(const std::string &,  const int & ); // Constructor for j instruction
+        J_Instructions(const std::string &,  const int &, const std::string &); // Constructor for j instruction
         
         virtual ~J_Instructions() = default; // destructor defined virtual to avoid errors when using delete on pointer objects of the class
         std::string getAddress() const; // getAddress in string format

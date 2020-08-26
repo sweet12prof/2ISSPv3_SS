@@ -17,22 +17,30 @@ int main(){
         int Immediate(25089);
         int adr{24502};
 
-        R_Instruction R_Instr{Rop, rs, rd, rd, shamt};
-        //R_Instruction R_Instr2{Rop, rs, rd, rt, shamt};
-        
-        I_Instruction I_Instr{Iop2, rs, rt, Immediate};
-        
-        J_Instructions J_Instr{jop, adr};
-        
-        Exp_Instructions Exp_Instr{op, rt, rd};
-        
+         R_Instruction R_Instr{Rop, rs, rt, rd, shamt, ""};
 
-        Scheduler Schd{ &Exp_Instr,  &R_Instr};
+         //std::cout << R_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
+         R_Instruction R_Instr2{Rop, rs, rd, rt, shamt, ""};
+
+         //std::cout << R_Instr2.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
+
 
         
+         I_Instruction I_Instr{Iop, rs, rt, -9999999, "",  "someLabel"};
+         //std::cout << I_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
 
-        for(auto item : Schd.schedulePair())
-             std::cout << item << std::endl;
+         J_Instructions J_Instr{jop, adr, ""};
+        
+         Exp_Instructions Exp_Instr{op, rd, rd, ""};
+          //std::cout << J_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
+
+          //std::cout << Exp_Instr.MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
+         Scheduler Schd{ &I_Instr,  &R_Instr};
+
+        
+
+         for(auto item : Schd.schedulePair())
+              std::cout << item << std::endl;
 
 
         //  std::array <Instructions *, 4> InstrPtr {&R_Instr, &Exp_Instr, &I_Instr, &J_Instr};
@@ -47,4 +55,14 @@ int main(){
 
        // std::cout << I_Instr.MachineCodeString(Instructions::machineFormat::Binary);
     
+     // std::string someStr {"Chris    is     a            fool"};
+     // std::stringstream stream{someStr};
+
+     // std::string s1;
+     // std::string s2;
+     // std::string s3;
+
+     // stream >> s1 >> s2 >> s3;
+     // std::cout <<"s1 is : " << s1 << std::endl << "s2 is " << s2 << std::endl << "s3 is " << s3;
+
 }

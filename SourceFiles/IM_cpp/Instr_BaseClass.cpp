@@ -2,10 +2,11 @@
  
  Instructions::Instructions(){}
 
- Instructions::Instructions(const std::string & opCode){
+ Instructions::Instructions(const std::string & opCode, const std::string & someLabel)
+    :label{someLabel}, opCodeString{opCode}
+{
     Instructions::setOpcode(opCode);
     Instructions::setInstrType(opCode);
-
 }
 
 Instructions::InstrType Instructions::getInstrType() const{
@@ -37,7 +38,17 @@ std::string Instructions::getOpcode() const {
 }
 
 std::string Instructions::MachineCodeString(machineFormat some) const {
-    return getOpcode();
+    
+        
+      if (some == Instructions::machineFormat::S_tring)
+        {
+            std::stringstream stream;
+            stream << Instructions::getLabel() << (Instructions::getLabel() == "" ? "" : " : ") << Instructions::getopCodeString() << " ";
+            return stream.str();  
+        } 
+
+      else 
+            return getOpcode();
 }
 
 
@@ -47,7 +58,10 @@ std::string Instructions::nopInstruction(Instructions::machineFormat some){
       
         return returnVal.to_string();
     }
-        
+
+    else if(some == Instructions::machineFormat::S_tring)
+        return "nop";
+    
     else  
         {
             auto p = returnVal.to_ulong();
@@ -61,7 +75,20 @@ std::string Instructions::nopInstruction(Instructions::machineFormat some){
        // output << std::setw(8) << std::hex << std::showbase << std::setfill('0') << p;
 }
 
-    
+std::string Instructions::getLabel() const{
+    return Instructions::label;
+}
+
+void Instructions::setLabel(const std::string & somelabel){
+    this->label = somelabel;
+}
     
 
+std::string Instructions::getopCodeString() const {
+    return this->opCodeString;
+}
+
+void Instructions::setOpcodeString(const std::string & OpcodeString) {
+    this->opCodeString = opCodeString;
+}
 

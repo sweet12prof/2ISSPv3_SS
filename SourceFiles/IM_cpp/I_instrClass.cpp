@@ -1,8 +1,8 @@
 #include "../../Headers/IM_hpp/I_instrClass.hpp"
 I_Instruction::I_Instruction(){}
 
-I_Instruction::I_Instruction(const std::string & op, const int & rs, const int & rt, const int & Imm)
-    : RI_Instruction(op, rs, rt)
+I_Instruction::I_Instruction(const std::string & op, const int & rs, const int & rt, const int & Imm, const std::string &optionalLabel, const std::string &optionalimmediateLabel)
+    : RI_Instruction(op, rs, rt, optionalLabel), ImmediateLabel{optionalimmediateLabel}
 {
     I_Instruction::setImmediate(Imm);
     I_Instruction::setItype_Type(op);
@@ -24,6 +24,24 @@ std::string I_Instruction::MachineCodeString(machineFormat some) const {
     std::string returnString {RI_Instruction::MachineCodeString(machineFormat::Binary) + I_Instruction::getImmediate()};
         if(some == Instructions::machineFormat::Binary)
             return returnString;
+        else if(some == Instructions::machineFormat::S_tring)
+        {
+            std::string someString { RI_Instruction::MachineCodeString(machineFormat::S_tring)};
+            std::stringstream output;
+            if(I_Instruction::ImmediateLabel != "")
+                output << someString 
+                       << " " 
+                       <<I_Instruction::getImmediateLabel();
+            else 
+                output << someString 
+                        << "(" 
+                        << std::dec
+                        <<  I_Instruction::Immediate.to_ulong()
+                        <<  ")";
+
+
+            return output.str();
+        }
         else{
             auto p =std::bitset<32>(returnString).to_ulong();
             std::ostringstream output;
@@ -48,4 +66,12 @@ void I_Instruction::setItype_Type(const std::string & op){
 
 I_Instruction::I_Type I_Instruction::getIType_Type() const {
     return this->iType_Type;
+}
+
+std::string I_Instruction::getImmediateLabel() const{
+    return I_Instruction::ImmediateLabel;
+}
+
+void I_Instruction::setImmediateLabel(const std::string & labelInput){
+    this->ImmediateLabel = labelInput;
 }

@@ -2,8 +2,8 @@
 
 J_Instructions::J_Instructions(){}
 
-J_Instructions::J_Instructions(const std::string & op, const int & address)
-    : Instructions(op)
+J_Instructions::J_Instructions(const std::string & op, const int & address, const std::string &optionalLabel)
+    : Instructions(op, optionalLabel)
 {
     J_Instructions::setAddress(address);
 }
@@ -28,6 +28,13 @@ std::string J_Instructions::getAddress() const
 
       if(some == Instructions::machineFormat::Binary)
             return returnString;
+      else if(some == Instructions::machineFormat::S_tring)
+        {
+             std::string someString { Instructions::MachineCodeString(machineFormat::S_tring)};
+            std::stringstream output;
+            output << someString << std::dec << std::bitset<26>(J_Instructions::getAddress()).to_ulong();
+            return output.str();
+        }
         else{
             auto p =std::bitset<32>(returnString).to_ulong();
             std::ostringstream output;

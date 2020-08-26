@@ -8,15 +8,15 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
             R_Instruction * i2 = dynamic_cast< R_Instruction *>(Scheduler::Instrpair.second);
             if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt() || i1->getRt() == i2->getRd()){
                 result = {
-                            i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                            i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
                 };
             }
             else 
                 result = {
-                            i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
                 };
         }
         break;
@@ -31,14 +31,14 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
                 case I_Instruction::I_Type::Mem_Sw_Type : {
                     if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt())
                          result = {
-                                    i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                    Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                                    i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                                    i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                    Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                    i2->MachineCodeString(Instructions::machineFormat::S_tring)
                                  };
                     else 
                         result = {
-                                    i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                    i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                                    i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                    i2->MachineCodeString(Instructions::machineFormat::S_tring)
                                  };
                 }
                 break;
@@ -47,14 +47,14 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
                     {
                         if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt())
                              result = {
-                                    i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                    Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                                    i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                                    i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                    Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                    i2->MachineCodeString(Instructions::machineFormat::S_tring)
                                  };
                         else 
                             result = {
-                                    i2->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                    i1->MachineCodeString(Instructions::machineFormat::Decimal)
+                                    i2->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                    i1->MachineCodeString(Instructions::machineFormat::S_tring)
                                  };
                     }
                 break;
@@ -68,8 +68,8 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
              J_Instructions * i2 = dynamic_cast< J_Instructions *>(Scheduler::Instrpair.second);
 
              result = {
-                        i2->MachineCodeString(Instructions::machineFormat::Decimal), 
-                        i1->MachineCodeString(Instructions::machineFormat::Decimal)
+                        i2->MachineCodeString(Instructions::machineFormat::S_tring), 
+                        i1->MachineCodeString(Instructions::machineFormat::S_tring)
                         };
         }
         break;
@@ -79,14 +79,14 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
 
             if(i1->getRt() == i2->getRd() || i1->getRt() == i2->getRd())
                 result = {
-                            i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                            Instructions::nopInstruction(Instructions::machineFormat::Decimal), 
-                            i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
                             };
             else 
                 result = {
-                                    i1->MachineCodeString(Instructions::machineFormat::Decimal), 
-                                    i2->MachineCodeString(Instructions::machineFormat::Decimal)
+                                    i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                    i2->MachineCodeString(Instructions::machineFormat::S_tring)
                                  };
 
 
