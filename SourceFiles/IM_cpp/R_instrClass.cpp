@@ -68,3 +68,16 @@ std::string R_Instruction::MachineCodeString(Instructions::machineFormat some) c
     }
 };
 
+
+
+void  R_Instruction::createR_Instruction(const std::string & op, const int & rs, const int & rt, const int & rd, const int & shmt, const std::string & opLabel){
+    R_Instruction::setOpcode(op);
+    R_Instruction::setRs(rs);
+    R_Instruction::setRd(rd);
+    R_Instruction::setLabel(opLabel);
+    R_Instruction::setOpcodeString(op);
+    R_Instruction::setFunct(op);
+    R_Instruction::setShamt(shmt);
+    R_Instruction::setRd(rd);
+}
+

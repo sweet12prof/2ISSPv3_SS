@@ -32,9 +32,12 @@ class R_Instruction : public RI_Instruction{
          // accessors and mutators for rs
         std::string getFunct() const;
         void setFunct(const std::string &);
+        
     
     //-------------------------------------
         virtual std::string MachineCodeString(machineFormat ) const override; // Overide to produce Machine representation of Instruction
+
+        void createR_Instruction(const std::string &, const int &, const int &, const int &, const int &, const std::string &);
 };
 
 #endif

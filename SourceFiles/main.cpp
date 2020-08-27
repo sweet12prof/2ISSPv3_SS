@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../Headers/IM_hpp/all_Instr.hpp"
 #include "../Headers/Scheduler_hpp/Scheduler.hpp"
+#include "./FileHelpers/FileHelper.hpp"
 #include <array>
 #include <algorithm>
 
@@ -14,65 +15,15 @@ std::vector<std::string>  InstructionQueue{
 };
 
 
-std::string parseString(std::string );
-std::stringstream genstream(std::string);
-bool CurrentinstrHasLabel;
+
+
 
 int main()
 {
-    std::string parseResult {parseString("jLabel: addi $5, $3, $1")};
-    std::stringstream genStreamResult{genstream(parseResult)};
-    
-     std::string Label;
-     std::string op;
-
-    if(CurrentinstrHasLabel)
-     {
-          genStreamResult >> Label >> op;
-          std::cout << std::endl << (int) Instructions::getInstrType2(op);
-     }
-
+     Instructions *someInstr =  createPair("       jLabel: add $5, $3, $1");
+     R_Instruction * R_Instr = dynamic_cast< R_Instruction *>(someInstr);
+    // std::cout << R_Instr->MachineCodeString(Instructions::machineFormat::S_tring);
+          
 }
 
 
-std::string parseString(std::string someString){
-    
-     std::string stringWithoutWhiteSpace;
-
-     for(auto item : someString){
-          if(item != ' ')
-          stringWithoutWhiteSpace += item;
-     }
-
-     //std::cout << stringWithoutWhiteSpace; 
-     return stringWithoutWhiteSpace;
-    
-}
-
-
-std::stringstream genstream(std::string someString){
-    std::string result;
-    for(auto item : someString){
-     switch(item){
-          case ':' :
-               result += ": ";
-               CurrentinstrHasLabel = true;
-          break;
-
-          case '$' :
-               result += " ";
-          break;
-
-          case ',' :
-          break;
-
-
-          default :
-               result += item;
-     }
-    }
-
-    std::cout << result;
-     std::stringstream output{result};
-    return output;
-}
