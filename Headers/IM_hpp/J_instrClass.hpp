@@ -18,6 +18,8 @@ class J_Instructions : public Instructions {
         
         virtual std::string MachineCodeString(machineFormat ) const override; // returns the binary representataion of the J_Instruction
 
+        void createJ_Instructions(const std::string &,  const int &, const std::string &, const std::string &);
+
     //----------accessor and mutator for jumpLabel String
         void setjumpLabel(const std::string &);
         std::string getJumpLabel() const;

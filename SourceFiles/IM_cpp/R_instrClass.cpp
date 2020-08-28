@@ -78,6 +78,7 @@ void  R_Instruction::createR_Instruction(const std::string & op, const int & rs,
     R_Instruction::setOpcodeString(op);
     R_Instruction::setFunct(op);
     R_Instruction::setShamt(shmt);
-    R_Instruction::setRd(rd);
+    R_Instruction::setRt(rt);
+    R_Instruction::setInstrType(op);
 }
 

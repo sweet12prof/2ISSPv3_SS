@@ -53,3 +53,13 @@ std::string J_Instructions::getAddress() const
     void J_Instructions::setjumpLabel(const std::string & jLabelInput){
         J_Instructions::jumpLabel = jLabelInput;
     }
+
+
+    void J_Instructions::createJ_Instructions(const std::string & op,  const int & Address, const std::string & opLabel, const std::string & jumpLabel){
+            J_Instructions::setOpcode(op);
+            J_Instructions::setOpcodeString(op);
+            J_Instructions::setLabel(opLabel);
+            J_Instructions::setjumpLabel(jumpLabel);
+            J_Instructions::setAddress(Address);
+
+    }

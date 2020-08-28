@@ -1,5 +1,5 @@
 #include "./RI_instrClass.hpp"
-#include <unordered_map>
+#include <map>
 
 #ifndef I_INSTR_H
 #define I_INSTR_H
@@ -30,9 +30,14 @@ class I_Instruction : public RI_Instruction{
         std::string getImmediateLabel() const;
         void setImmediateLabel(const std::string &);
 
+    //
+        void createI_Instruction(const std::string &, const int &, const int &, const int &, const std::string &, const std::string &);
+
+        static I_Type getIType_Type_static(const std::string &); 
+        static std::map<std::string, int> I_Type_Types_static ; 
 
     private:
-        const std::unordered_map<std::string, int> I_Type_Types 
+        const std::map<std::string, int> I_Type_Types
         {
             {"addi", 3}, 
             {"bne", 4}, 

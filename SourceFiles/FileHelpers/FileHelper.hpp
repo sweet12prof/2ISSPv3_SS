@@ -2,10 +2,10 @@
 #include <array>
    #ifndef HELPERS_H
    #define HELPERS_H
-        std::string parseString(std::string );
+        std::stringstream parseString(std::string);
         std::stringstream genstream(std::string);
-        Instructions * createPair(std::string);
-        static bool CurrentinstrHasLabel2;
+        std::array <Instructions *, 2> createPair(std::array<std::string, 2>);
+        static bool hasLabel;;
        
        //void setInstrLabel(bool);
    #endif

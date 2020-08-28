@@ -43,7 +43,8 @@ std::string Instructions::MachineCodeString(machineFormat some) const {
       if (some == Instructions::machineFormat::S_tring)
         {
             std::stringstream stream;
-            stream << Instructions::getLabel() << (Instructions::getLabel() == "" ? "" : " ") << Instructions::getopCodeString() << " ";
+            stream << Instructions::getLabel() << (Instructions::getLabel() == "" ? "" : " ");
+            stream << (Instructions::getopCodeString() + " ");
             return stream.str();  
         } 
 
@@ -80,7 +81,7 @@ std::string Instructions::getLabel() const{
 }
 
 void Instructions::setLabel(const std::string & somelabel){
-    this->label = somelabel;
+    Instructions::label = somelabel;
 }
     
 
@@ -89,7 +90,7 @@ std::string Instructions::getopCodeString() const {
 }
 
 void Instructions::setOpcodeString(const std::string & OpcodeString) {
-    this->opCodeString = opCodeString;
+    Instructions::opCodeString = OpcodeString;
 }
 
 Instructions::InstrType Instructions::getInstrType2(const std::string &someOp){

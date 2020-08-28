@@ -28,10 +28,16 @@ std::string I_Instruction::MachineCodeString(machineFormat some) const {
         {
             std::string someString { RI_Instruction::MachineCodeString(machineFormat::S_tring)};
             std::stringstream output;
-            if(I_Instruction::ImmediateLabel != "")
+            if( (I_Instruction::getIType_Type() == I_Instruction::I_Type::Branch_Type)  )
                 output << someString 
                        << " " 
                        <<I_Instruction::getImmediateLabel();
+
+            else if( (I_Instruction::getIType_Type() == I_Instruction::I_Type::Imm_Type) )
+                output << someString 
+                       << " " 
+                       << std::dec 
+                       << I_Instruction::Immediate.to_ulong();
             else 
                 output << someString 
                         << "(" 
@@ -74,4 +80,44 @@ std::string I_Instruction::getImmediateLabel() const{
 
 void I_Instruction::setImmediateLabel(const std::string & labelInput){
     this->ImmediateLabel = labelInput;
+}
+
+
+void  I_Instruction::createI_Instruction(const std::string & op, const int & rs, const int & rt, const int & Imm, const std::string & opLabel, const std::string & opImmediateLabel){
+     I_Instruction::setImmediate(Imm);
+     I_Instruction::setItype_Type(op);
+
+     I_Instruction::ImmediateLabel = opImmediateLabel;
+     
+     I_Instruction::setOpcode(op);
+     I_Instruction::setOpcodeString(op);
+     I_Instruction::setRs(rs);
+     I_Instruction::setRt(rt);
+     I_Instruction::setLabel(opLabel);
+     I_Instruction::setInstrType(op);
+    
+}
+
+
+std::map<std::string, int> I_Instruction::I_Type_Types_static = {
+            {"addi", 3}, 
+            {"bne", 4}, 
+            {"subi", 3}, 
+            {"andi", 3}, 
+            {"ori", 3}, 
+            {"xori", 3}, 
+            {"addiu", 3}, 
+            {"beq", 4},
+            {"sw", 1},
+            {"lw", 1}
+};
+
+I_Instruction::I_Type I_Instruction::getIType_Type_static(const std::string & op){
+    auto p = I_Instruction::I_Type_Types_static.find(op);
+
+    if(p == I_Instruction::I_Type_Types_static.end())
+        throw std::invalid_argument("Undefined Opcode specified");
+    else {
+          return static_cast<I_Instruction::I_Type>(p->second);
+    }
 }

@@ -4,7 +4,7 @@
 #include "./FileHelpers/FileHelper.hpp"
 #include <array>
 #include <algorithm>
-
+#include <string>
 std::vector<std::string>  InstructionQueue{
      "add $1 $2 $3",
      "add $4 $2 $3", 
@@ -14,16 +14,40 @@ std::vector<std::string>  InstructionQueue{
      "mfc $3, $5"
 };
 
+ 
 
 
-
+ std::stringstream parseString(std::string);
 
 int main()
 {
-     Instructions *someInstr =  createPair("       jLabel: add $5, $3, $1");
-     R_Instruction * R_Instr = dynamic_cast< R_Instruction *>(someInstr);
-    // std::cout << R_Instr->MachineCodeString(Instructions::machineFormat::S_tring);
-          
+     int i{0};
+      std::array <std::string, 2> test{
+          "sub $3 $2 $1",
+          "add $4 $2 $3" 
+      };
+
+     std::array <Instructions *, 2> res =  createPair(test);
+
+     R_Instruction * r1 = dynamic_cast<R_Instruction *> (res.at(1));
+     
+     R_Instruction * r2 = dynamic_cast<R_Instruction *> (res.at(0));
+     
+     std::cout << "string is " << r2->MachineCodeString(Instructions::machineFormat::S_tring);
+      std::cout << r1->MachineCodeString(Instructions::machineFormat::S_tring);
+     // std::cout << r2->MachineCodeString(Instructions::machineFormat::S_tring);
+     // std::cout << r1->MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
+     // std::cout << r2->MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
+
+     Scheduler newSchd{res.at(0), res.at(1) };
+
+     for(auto item : newSchd.schedulePair())
+          std::cout << item << std::endl;
+
+
+     
 }
 
+
+ 
 

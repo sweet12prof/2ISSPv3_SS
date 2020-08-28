@@ -58,13 +58,13 @@ class Instructions {
 
         //
         static  std::map < std::string, std::pair <int, int > > varInstr2;
-       
+        void setInstrType(const std::string &);
     private: 
          std::bitset<6> Opcode; // Opcode is common to all instructions, thus in base class
          std::string opCodeString; // String representation of Opcode String
          std::string label; //Optional Label For each instruction 
          InstrType instrType;
-         void setInstrType(const std::string &); // This is defined private because its handled within the object itself ...Mutator for Instruction Type
+         // This is defined private because its handled within the object itself ...Mutator for Instruction Type
 
             //Friend Function to generate nop instruction whenever needed
 };
