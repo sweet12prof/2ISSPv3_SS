@@ -83,12 +83,12 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                     case Instructions::InstrType::R_Type :
                          {
                               if(hasLabel){
-                                   output >> label >>  op >> rs >> rt >> rd; 
+                                   output >> label >>  op >> rd >> rs >> rt; 
                                    schd_R_Instr.at(i).createR_Instruction(op, rs, rt, rd, 0, label);
                                    result.at(i) = &schd_R_Instr.at(i);
                               }
                               else {
-                                   output >> op >> rs >> rt >> rd; 
+                                   output >> op >> rd >> rs >> rt; 
                                    schd_R_Instr.at(i).createR_Instruction(op, rs, rt, rd, 0, "");
                                    result.at(i) = &schd_R_Instr.at(i);
                               }

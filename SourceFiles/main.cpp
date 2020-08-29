@@ -36,31 +36,31 @@ int main()
      //      std::cout << item << std::endl;
      int i{0};
 
-     while ( i < InstructionQueue.size() ){
+     // while ( i < InstructionQueue.size() ){
           
                std::array <Instructions *, 2> res =  createPair( 
                     {
-                         InstructionQueue.at(i),
-                         InstructionQueue.at(i + 1)
+                         InstructionQueue.at(0),
+                         InstructionQueue.at(1)
                     }
                );
           
           Scheduler newSchd{res.at(0), res.at(1)};
 
-          if(newSchd.schedulePair().size() == 3)
-               i += 1;
-          else 
-               i+=2;
-               int j{0};
+          // if(newSchd.schedulePair().size() == 3)
+          //      i += 1;
+          // else 
+          //      i+=2;
+          //      int j{0};
                for(auto item : newSchd.schedulePair())
-                    {
-                         if(j < 2)
+                    // { {}
+                    //      if(j < 2)
                               std::cout << item << std::endl;
-                         ++j;
-                    }
+                        //. ++j;
+                    //}
          
 
-     }
+     //}
      
 }
 
