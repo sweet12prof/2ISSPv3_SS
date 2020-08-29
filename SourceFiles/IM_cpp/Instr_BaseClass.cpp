@@ -43,7 +43,7 @@ std::string Instructions::MachineCodeString(machineFormat some) const {
       if (some == Instructions::machineFormat::S_tring)
         {
             std::stringstream stream;
-            stream << Instructions::getLabel() << (Instructions::getLabel() == "" ? "" : " ");
+            stream << Instructions::getLabel();  //<< (Instructions::getLabel() == "" ? "" : ": ");
             stream << (Instructions::getopCodeString() + " ");
             return stream.str();  
         } 
@@ -112,5 +112,6 @@ std::map < std::string, std::pair <int, int > > Instructions::varInstr2 = {
         {"J", {3, 21}}, 
         {"nop", {6, 0}}, 
         {"beq", {2, 15}} ,
-        {"lw", {2, 13}}
+        {"lw", {2, 13}}, 
+        {"sw", {2, 5}}
     };

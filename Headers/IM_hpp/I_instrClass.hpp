@@ -48,7 +48,7 @@ class I_Instruction : public RI_Instruction{
             {"addiu", 3}, 
             {"beq", 4},
             {"sw", 1},
-            {"lw", 1}
+            {"lw", 2}
         };
 
         std::bitset<16>Immediate; // Immediate Portion of Instruction

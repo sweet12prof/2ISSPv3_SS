@@ -35,7 +35,7 @@ std::string J_Instructions::getAddress() const
             if(J_Instructions::getJumpLabel() == "")
                 output << someString << std::dec << std::bitset<26>(J_Instructions::getAddress()).to_ulong();
             else 
-                 output << someString << std::dec << " " << J_Instructions::getJumpLabel();
+                 output << someString << std::dec << J_Instructions::getJumpLabel();
             return output.str();
         }
         else{
@@ -61,5 +61,6 @@ std::string J_Instructions::getAddress() const
             J_Instructions::setLabel(opLabel);
             J_Instructions::setjumpLabel(jumpLabel);
             J_Instructions::setAddress(Address);
+            J_Instructions::setInstrType(op);
 
     }

@@ -4,6 +4,7 @@
 std::array <R_Instruction, 2> schd_R_Instr;
 std::array <I_Instruction, 2> schd_I_Instr;
 std::array <J_Instructions, 2> schd_J_Instr;
+std::array <Exp_Instructions, 2> schd_Exp_Instr;
 
 
 
@@ -19,7 +20,7 @@ std::stringstream parseString(std::string someString){
                     case ':' :
                          hasLabel = true;
                          if(token != "")
-                              result << (token + " ");
+                              result << (token + ": ");
                          token = "";
                    break; 
 
@@ -97,17 +98,32 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                     case Instructions::InstrType::I_Type :
                          {
                              switch(I_Instruction::getIType_Type_static(op)){
-                                  case I_Instruction::I_Type::Imm_Type :
+                                  
                                   case I_Instruction::I_Type::Mem_LwType :
                                   case I_Instruction::I_Type::Mem_Sw_Type :
                                         {
                                              if(hasLabel){
-                                                  output >> label >> op >> rs >> rt >>  Imm;
+                                                  output >> label >> op >> rt >> Imm >>  rs;
                                                   schd_I_Instr.at(i).createI_Instruction(op, rs, rt, Imm, label, "");
+                                                  result.at(i) = &schd_I_Instr.at(i) ;
+                                             }
+                                             else {
+                                                  output >> op >> rt >> Imm >> rs;
+                                                  schd_I_Instr.at(i).createI_Instruction(op, rs, rt, Imm, "", "");
                                                   result.at(i) =  &schd_I_Instr.at(i);
-                                                 //std::cout << schd_I_Instr.at(i).MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
-                                                  result.at(i)->MachineCodeString(Instructions::machineFormat::S_tring);
-                                                 // std::cout  << "op is " << schd_I_Instr.at(i).getOpcode()  <<  "Instruction type is " << (int)schd_I_Instr.at(i).getIType_Type() << " rs is " << schd_I_Instr.at(i).getRs() << " rt is " << schd_I_Instr.at(i).getRt() ;
+                                             }
+                                             
+                                        }
+                                  break;
+
+
+
+                                  case I_Instruction::I_Type::Imm_Type :
+                                        {
+                                             if(hasLabel){
+                                                  output >> label >> op >> rt >> rs >>  Imm;
+                                                  schd_I_Instr.at(i).createI_Instruction(op, rs, rt, Imm, label, "");
+                                                  result.at(i) = &schd_I_Instr.at(i) ;
                                              }
                                              else {
                                                   output >> op >> rs >> rt >> Imm;
@@ -121,12 +137,12 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                                   case I_Instruction::I_Type::Branch_Type : 
                                         {
                                              if(hasLabel){
-                                                                 output >> label >> op >> rs >> rt >>  immLabel;
+                                                                 output >> label >> op >> rt >> rs >>  immLabel;
                                                                  schd_I_Instr.at(i).createI_Instruction(op, rs, rt, 0 , label, immLabel);
                                                                  result.at(i) =  &schd_I_Instr.at(i);
                                              }
                                              else {
-                                                                 output >>  op >> rs >> rt >>  immLabel;
+                                                                 output >>  op >> rt >> rs >>  immLabel;
                                                                  schd_I_Instr.at(i).createI_Instruction(op, rs, rt, 0 , "", immLabel);
                                                                  result.at(i) =  &schd_I_Instr.at(i);
                                              }
@@ -134,6 +150,7 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                                    break;
                              }
                          }
+                         break;
 
                     case  Instructions::InstrType::J_Type : {
                          if(hasLabel){
@@ -148,10 +165,25 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                          }
                     }
                     break;
+
+                    case Instructions::InstrType::Exp : {
+                         if(hasLabel){
+                              output >> label >> op >> rd >> rt;
+                              schd_Exp_Instr.at(i).createExp_Instructions(op, rt, rd, label);
+                              result.at(i) = &schd_Exp_Instr.at(i);
+                         }
+                         else {
+                                   output >> op >> rd >> rt;
+                                   schd_Exp_Instr.at(i).createExp_Instructions(op, rt, rd, "");
+                                   result.at(i) = &schd_Exp_Instr.at(i);
+
+                         }
+                    }
+                    break;
                }
                ++i;
      }
-
+          
    return result;
 }
 

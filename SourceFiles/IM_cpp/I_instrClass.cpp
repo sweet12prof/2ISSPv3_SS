@@ -21,6 +21,10 @@ std::string I_Instruction::getImmediate() const {
 
 
 std::string I_Instruction::MachineCodeString(machineFormat some) const {
+
+    std::stringstream streamrt;
+    streamrt<< std::bitset<5>(I_Instruction::getRt()).to_ulong();
+
     std::string returnString {RI_Instruction::MachineCodeString(machineFormat::Binary) + I_Instruction::getImmediate()};
         if(some == Instructions::machineFormat::Binary)
             return returnString;
@@ -39,10 +43,14 @@ std::string I_Instruction::MachineCodeString(machineFormat some) const {
                        << std::dec 
                        << I_Instruction::Immediate.to_ulong();
             else 
-                output << someString 
-                        << "(" 
-                        << std::dec
-                        <<  I_Instruction::Immediate.to_ulong()
+                output  << std::dec
+                        << (I_Instruction::getLabel() + " " )
+                        << (I_Instruction::getopCodeString() + " ")
+                        << "$" 
+                        <<  (streamrt.str() + " ")
+                        <<   I_Instruction::Immediate.to_ulong() 
+                        << "($" 
+                        <<  std::bitset<5>(I_Instruction::getRs()).to_ulong()
                         <<  ")";
 
 
@@ -88,7 +96,7 @@ void  I_Instruction::createI_Instruction(const std::string & op, const int & rs,
      I_Instruction::setItype_Type(op);
 
      I_Instruction::ImmediateLabel = opImmediateLabel;
-     
+
      I_Instruction::setOpcode(op);
      I_Instruction::setOpcodeString(op);
      I_Instruction::setRs(rs);
@@ -109,7 +117,7 @@ std::map<std::string, int> I_Instruction::I_Type_Types_static = {
             {"addiu", 3}, 
             {"beq", 4},
             {"sw", 1},
-            {"lw", 1}
+            {"lw", 2}
 };
 
 I_Instruction::I_Type I_Instruction::getIType_Type_static(const std::string & op){

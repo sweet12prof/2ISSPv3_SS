@@ -3,7 +3,6 @@
    #ifndef HELPERS_H
    #define HELPERS_H
         std::stringstream parseString(std::string);
-        std::stringstream genstream(std::string);
         std::array <Instructions *, 2> createPair(std::array<std::string, 2>);
         static bool hasLabel;;
        

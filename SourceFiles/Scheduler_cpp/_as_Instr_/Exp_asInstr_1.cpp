@@ -6,7 +6,7 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
 
         case Instructions::InstrType::R_Type : {
             R_Instruction * i2 = dynamic_cast< R_Instruction *>(Scheduler::Instrpair.second);
-            if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt() || i1->getRt() == i2->getRd()){
+            if(i1->getRd() == i2->getRs() || i1->getRd() == i2->getRt() || i1->getRd() == i2->getRd()){
                 result = {
                             i1->MachineCodeString(Instructions::machineFormat::S_tring), 
                             Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
@@ -29,7 +29,7 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
                 case I_Instruction::I_Type::Imm_Type :
                 case I_Instruction::I_Type::Mem_LwType :
                 case I_Instruction::I_Type::Mem_Sw_Type : {
-                    if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt())
+                    if(i1->getRd() == i2->getRs() || i1->getRd() == i2->getRt())
                          result = {
                                     i1->MachineCodeString(Instructions::machineFormat::S_tring), 
                                     Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
@@ -45,7 +45,7 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
 
                 case I_Instruction::I_Type::Branch_Type :
                     {
-                        if(i1->getRt() == i2->getRs() || i1->getRt() == i2->getRt())
+                        if(i1->getRd() == i2->getRs() || i1->getRd() == i2->getRt())
                              result = {
                                     i1->MachineCodeString(Instructions::machineFormat::S_tring), 
                                     Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
@@ -77,7 +77,7 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
         case Instructions::InstrType::Exp :{
             Exp_Instructions * i2 = dynamic_cast< Exp_Instructions *>(Scheduler::Instrpair.second);
 
-            if(i1->getRt() == i2->getRd() || i1->getRt() == i2->getRd())
+            if(i1->getRd() == i2->getRd() || i1->getRd() == i2->getRd())
                 result = {
                             i1->MachineCodeString(Instructions::machineFormat::S_tring), 
                             Instructions::nopInstruction(Instructions::machineFormat::S_tring), 

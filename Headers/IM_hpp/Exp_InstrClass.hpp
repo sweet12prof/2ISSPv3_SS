@@ -26,6 +26,8 @@ public:
         virtual ~Exp_Instructions() = default;
 //-----------ML representation of mfc Instruction
     virtual std::string MachineCodeString(machineFormat ) const override; // Overide to produce Machine representation of Instruction
+//-------------------------
+    void createExp_Instructions(const std::string &, const int &, const int&, const std::string &);
 };
 
 #endif

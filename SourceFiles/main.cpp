@@ -11,40 +11,56 @@ std::vector<std::string>  InstructionQueue{
      "beq $4 $1 jLabel",
      "sub $5 $3 $1", 
      "jLabel: addi $5, $3, $1",
-     "mfc $3, $5"
+     "mfc $3, $5",
+     "add $12 $2 $1"
 };
 
  
 
-
- std::stringstream parseString(std::string);
-
 int main()
 {
+     // int i{0};
+     //  std::array <std::string, 2> test{
+     //      "mfc $5, $3", 
+     //       "label: sw $5 0($3)"
+     //  };
+
+     // std::array <Instructions *, 2> res =  createPair(test);
+
+     
+     
+    
+     // Scheduler newSchd{res.at(0), res.at(1) };
+
+     // for(auto item : newSchd.schedulePair())
+     //      std::cout << item << std::endl;
      int i{0};
-      std::array <std::string, 2> test{
-          "sub $3 $2 $1",
-          "add $4 $2 $3" 
-      };
 
-     std::array <Instructions *, 2> res =  createPair(test);
+     while ( i < InstructionQueue.size() ){
+          
+               std::array <Instructions *, 2> res =  createPair( 
+                    {
+                         InstructionQueue.at(i),
+                         InstructionQueue.at(i + 1)
+                    }
+               );
+          
+          Scheduler newSchd{res.at(0), res.at(1)};
 
-     R_Instruction * r1 = dynamic_cast<R_Instruction *> (res.at(1));
-     
-     R_Instruction * r2 = dynamic_cast<R_Instruction *> (res.at(0));
-     
-     std::cout << "string is " << r2->MachineCodeString(Instructions::machineFormat::S_tring);
-      std::cout << r1->MachineCodeString(Instructions::machineFormat::S_tring);
-     // std::cout << r2->MachineCodeString(Instructions::machineFormat::S_tring);
-     // std::cout << r1->MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
-     // std::cout << r2->MachineCodeString(Instructions::machineFormat::S_tring) << std::endl;
+          if(newSchd.schedulePair().size() == 3)
+               i += 1;
+          else 
+               i+=2;
+               int j{0};
+               for(auto item : newSchd.schedulePair())
+                    {
+                         if(j < 2)
+                              std::cout << item << std::endl;
+                         ++j;
+                    }
+         
 
-     Scheduler newSchd{res.at(0), res.at(1) };
-
-     for(auto item : newSchd.schedulePair())
-          std::cout << item << std::endl;
-
-
+     }
      
 }
 
