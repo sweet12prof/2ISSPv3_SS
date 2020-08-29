@@ -13,7 +13,10 @@ std::vector<std::string>  InstructionQueue{
      "sub $5 $3 $1", 
      "jLabel : addi $5 $4 1",
      "mfc $3 $5",
-     "someLabel     :       add $12 $2 $1"
+     "someLabel     :       add $12 $2 $1",
+     "lw $3 180($30)", 
+     "someLabel: sw $3 180($30)", 
+
 };
 
  
@@ -52,25 +55,6 @@ int main()
                          }
                
           }
-              
-          
-         
-
-          // if(newSchd.schedulePair().size() == 3)
-          //      i += 1;
-          // else 
-          //      i+=2;
-          //      int j{0};
-               // for(auto item : newSchd.schedulePair())
-               //      // { {}
-               //      //      if(j < 2)
-               //                std::cout << item << std::endl;
-               //          //. ++j;
-               //      //}
-         
-
-     //}
-     
 }
 
 

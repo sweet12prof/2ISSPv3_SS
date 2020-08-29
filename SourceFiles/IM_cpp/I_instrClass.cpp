@@ -25,6 +25,9 @@ std::string I_Instruction::MachineCodeString(machineFormat some) const {
     std::stringstream streamrt;
     streamrt<< std::dec << std::bitset<16>( I_Instruction::getImmediate() ).to_ulong();
 
+     std::stringstream streamrt2;
+    streamrt2 << std::dec << std::bitset<16>( I_Instruction::getRt() ).to_ulong();
+
     std::string returnString {RI_Instruction::MachineCodeString(machineFormat::Binary) + I_Instruction::getImmediate()};
         if(some == Instructions::machineFormat::Binary)
             return returnString;
@@ -55,10 +58,10 @@ std::string I_Instruction::MachineCodeString(machineFormat some) const {
 
             else 
                 output  << std::dec
-                        << (I_Instruction::getLabel() + " " )
+                        << (I_Instruction::getLabel() != "" ?   (I_Instruction::getLabel() + ": ") : "")
                         << (I_Instruction::getopCodeString() + " ")
                         << "$" 
-                        <<  (streamrt.str() + " ")
+                        <<  ( streamrt2.str() + " ")
                         <<   I_Instruction::Immediate.to_ulong() 
                         << "($" 
                         <<  std::bitset<5>(I_Instruction::getRs()).to_ulong()
