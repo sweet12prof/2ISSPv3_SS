@@ -1,4 +1,4 @@
-#include "../../../Headers/IM_hpp/nopInstruction.hpp"
+#include "../../Headers/IM_hpp/nopInstruction.hpp"
 
 NOP_Instruction::NOP_Instruction(){}
 
@@ -26,14 +26,25 @@ std::string NOP_Instruction::MachineCodeString(Instructions::machineFormat some)
         break;
 
         case Instructions::machineFormat::S_tring :
-            FinalResult = NOP_Instruction::getopCodeString();
+            FinalResult = (NOP_Instruction::getLabel() == "" ? "" : NOP_Instruction::getLabel() + ": ") +  NOP_Instruction::getopCodeString();
         break;
 
         case Instructions::machineFormat::Decimal :
             {
                 std::stringstream Output;
                 Output << std::hex << std::showbase << std::bitset<6>(NOP_Instruction::getOpcode()) <<  std::bitset<26>(NOP_Instruction::getOtherBits());
+                FinalResult = Output.str();
             }
-        break;
+        break;         
     }
+        return FinalResult;
+
+}
+
+
+void NOP_Instruction::createNOP_Instruction(const std::string & op, const std::string &opLabel){
+    NOP_Instruction::setOpcode(op);
+    NOP_Instruction::setOpcodeString(op);
+    NOP_Instruction::setLabel(opLabel);
+    NOP_Instruction::setInstrType(op);
 }

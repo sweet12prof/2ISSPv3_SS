@@ -54,11 +54,18 @@ std::string R_Instruction::MachineCodeString(Instructions::machineFormat some) c
     if(some == machineFormat::Binary)
         return returnString;
     else if (some == machineFormat::S_tring){
-            std::string someString { RI_Instruction::MachineCodeString(machineFormat::S_tring)};
             std::stringstream output;
-            output << someString << " " << std::dec << "$"<< std::bitset<5>(R_Instruction::getRd()).to_ulong()  << " ";
-            return output.str();
-    }
+            output << std::dec
+                   << (R_Instruction::getLabel() != "" ?   (R_Instruction::getLabel() + ": ") : "") 
+                   << (R_Instruction::getopCodeString() )
+                   << " $"  
+                   << std::bitset<5>(R_Instruction::getRd()).to_ulong()
+                   << " $"  
+                   << std::bitset<5>(R_Instruction::getRs()).to_ulong()
+                   << " $"  
+                   << std::bitset<5>(R_Instruction::getRt()).to_ulong();
+                 return output.str();
+             }
     else {
            
             auto p = std::bitset<32>(returnString).to_ulong();

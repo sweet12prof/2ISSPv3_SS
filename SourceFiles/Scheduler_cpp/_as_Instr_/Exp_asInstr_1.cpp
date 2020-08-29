@@ -91,6 +91,17 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
 
 
         }
+        break;
+
+
+        case Instructions::InstrType::nop : {
+            NOP_Instruction *i2 = dynamic_cast< NOP_Instruction *> (Scheduler::Instrpair.second);
+                result = {
+                                    i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                    i2->MachineCodeString(Instructions::machineFormat::S_tring)
+                         };
+        }
+        break;
     }
         return result;
 } 

@@ -5,6 +5,7 @@ std::array <R_Instruction, 2> schd_R_Instr;
 std::array <I_Instruction, 2> schd_I_Instr;
 std::array <J_Instructions, 2> schd_J_Instr;
 std::array <Exp_Instructions, 2> schd_Exp_Instr;
+std::array <NOP_Instruction, 2> schd_NOP_Instr;
 
 
 
@@ -20,7 +21,7 @@ std::stringstream parseString(std::string someString){
                     case ':' :
                          hasLabel = true;
                          if(token != "")
-                              result << (token + ": ");
+                              result << (token + " ");
                          token = "";
                    break; 
 
@@ -41,6 +42,9 @@ std::stringstream parseString(std::string someString){
                     break;
 
                     case '$' :
+                    break;
+
+                    case ',' :
                     break;
 
                     
@@ -84,7 +88,7 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                          {
                               if(hasLabel){
                                    output >> label >>  op >> rd >> rs >> rt; 
-                                   schd_R_Instr.at(i).createR_Instruction(op, rs, rt, rd, 0, label);
+                                   schd_R_Instr.at(i).createR_Instruction(op,  rs, rt, rd,  0, label);
                                    result.at(i) = &schd_R_Instr.at(i);
                               }
                               else {
@@ -137,7 +141,7 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                                   case I_Instruction::I_Type::Branch_Type : 
                                         {
                                              if(hasLabel){
-                                                                 output >> label >> op >> rt >> rs >>  immLabel;
+                                                                 output >> label >> op >> rs >> rt >>  immLabel;
                                                                  schd_I_Instr.at(i).createI_Instruction(op, rs, rt, 0 , label, immLabel);
                                                                  result.at(i) =  &schd_I_Instr.at(i);
                                              }
@@ -157,7 +161,8 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                                         output >> label >> op >> immLabel;
                                         schd_J_Instr.at(i).createJ_Instructions(op, 0 , label, immLabel );
                                         result.at(i) = &schd_J_Instr.at(i);
-                         } 
+
+                                   } 
                          else {
                                          output >> op >> immLabel;
                                         schd_J_Instr.at(i).createJ_Instructions(op, 0 , "", immLabel );
@@ -169,14 +174,29 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
                     case Instructions::InstrType::Exp : {
                          if(hasLabel){
                               output >> label >> op >> rd >> rt;
-                              schd_Exp_Instr.at(i).createExp_Instructions(op, rt, rd, label);
+                              schd_Exp_Instr.at(i).createExp_Instructions(op, rd, rt, label);
                               result.at(i) = &schd_Exp_Instr.at(i);
                          }
                          else {
                                    output >> op >> rd >> rt;
-                                   schd_Exp_Instr.at(i).createExp_Instructions(op, rt, rd, "");
+                                   schd_Exp_Instr.at(i).createExp_Instructions(op, rd, rt, "");
                                    result.at(i) = &schd_Exp_Instr.at(i);
 
+                         }
+                    }
+                    break;
+
+
+                    case Instructions::InstrType::nop : {
+                         if(hasLabel) {
+                              output >> label >> op;
+                              schd_NOP_Instr.at(i).createNOP_Instruction(op, label);
+                              result.at(i) = & schd_NOP_Instr.at(i);
+                         }
+                         else{
+                              output >> label >> op;
+                              schd_NOP_Instr.at(i).createNOP_Instruction(op, "");
+                              result.at(i) = & schd_NOP_Instr.at(i);
                          }
                     }
                     break;

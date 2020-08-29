@@ -66,7 +66,7 @@ std::string Exp_Instructions::MachineCodeString(machineFormat some) const {
 
 }
 
- void  Exp_Instructions::createExp_Instructions(const std::string & op, const int & rt, const int& rd, const std::string & opLabel){
+ void  Exp_Instructions::createExp_Instructions(const std::string & op, const int & rd, const int& rt, const std::string & opLabel){
             Exp_Instructions::setOpcode(op);
             Exp_Instructions::setOpcodeString(op);
             Exp_Instructions::setLabel(opLabel);

@@ -45,6 +45,15 @@
                     };
             }
             break;
+
+            case Instructions::InstrType::nop : {
+                NOP_Instruction *i2 = dynamic_cast< NOP_Instruction *> (Scheduler::Instrpair.second);
+                    result = {
+                                        Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                        i2->MachineCodeString(Instructions::machineFormat::S_tring)
+                            };
+                }
+            break;
         }
 
         return result;

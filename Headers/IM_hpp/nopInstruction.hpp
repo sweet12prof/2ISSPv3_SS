@@ -13,5 +13,7 @@
         //---------------------
         void setOtherBits();
         std::string getOtherBits() const; 
+
+        void createNOP_Instruction(const std::string &, const std::string &);
     };
 #endif

@@ -23,7 +23,7 @@ std::string I_Instruction::getImmediate() const {
 std::string I_Instruction::MachineCodeString(machineFormat some) const {
 
     std::stringstream streamrt;
-    streamrt<< std::bitset<5>(I_Instruction::getRt()).to_ulong();
+    streamrt<< std::dec << std::bitset<16>( I_Instruction::getImmediate() ).to_ulong();
 
     std::string returnString {RI_Instruction::MachineCodeString(machineFormat::Binary) + I_Instruction::getImmediate()};
         if(some == Instructions::machineFormat::Binary)
@@ -33,15 +33,26 @@ std::string I_Instruction::MachineCodeString(machineFormat some) const {
             std::string someString { RI_Instruction::MachineCodeString(machineFormat::S_tring)};
             std::stringstream output;
             if( (I_Instruction::getIType_Type() == I_Instruction::I_Type::Branch_Type)  )
-                output << someString 
-                       << " " 
-                       <<I_Instruction::getImmediateLabel();
+                    output  << std::dec
+                            << (I_Instruction::getLabel() != "" ?   (I_Instruction::getLabel() + ": ") : "") 
+                            << (I_Instruction::getopCodeString() )
+                            << " $"  
+                            << std::bitset<5>(I_Instruction::getRt()).to_ulong()
+                            << " $"  
+                            << std::bitset<5>(I_Instruction::getRs()).to_ulong()
+                            << ( " " + I_Instruction::getImmediateLabel() );
 
             else if( (I_Instruction::getIType_Type() == I_Instruction::I_Type::Imm_Type) )
-                output << someString 
-                       << " " 
-                       << std::dec 
-                       << I_Instruction::Immediate.to_ulong();
+
+                       output << std::dec
+                                << (I_Instruction::getLabel() != "" ?   (I_Instruction::getLabel() + ": ") : "") 
+                                << (I_Instruction::getopCodeString() )
+                                << " $"  
+                                << std::bitset<5>(I_Instruction::getRt()).to_ulong()
+                                << " $"  
+                                << std::bitset<5>(I_Instruction::getRs()).to_ulong()
+                                << (" " + streamrt.str() );
+
             else 
                 output  << std::dec
                         << (I_Instruction::getLabel() + " " )
