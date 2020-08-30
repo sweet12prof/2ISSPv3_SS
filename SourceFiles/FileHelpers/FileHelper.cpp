@@ -9,12 +9,20 @@ std::array <NOP_Instruction, 2> schd_NOP_Instr;
 
 
 
-std::stringstream parseString(std::string someString){
-      std::string token ="";
+std::stringstream FileHelper::parseString(std::string someString){
+     // Variable to hold current Token in a string being parsed
+      std::string token =""; 
      
+     //  Stream to hold parsed Instruction
       std::stringstream result;
+
+     // Iterator to help in iterating string to parse
       int i{0};
+
+      // set has label vto false before starting parse
       hasLabel = false;
+
+      // iterate through every character in string  to parse
      for(auto item : someString)
           {
                switch(item){
@@ -62,8 +70,8 @@ std::stringstream parseString(std::string someString){
  }
 
 
-
-std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairString){
+//  Create pair returns reference to the pair of Instructions Objects created after succefful parsing
+std::array <Instructions *, 2> FileHelper::createPair(std::array<std::string, 2> InstrPairString){
      int i{0};
      std::array <Instructions *, 2> result;
 
@@ -71,7 +79,7 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
      int rs, rt, rd,  shamt,  Imm,  Address; 
 
      for(auto item : InstrPairString){
-          std::string InstrString = parseString(item).str() ;
+          std::string InstrString = FileHelper::parseString(item).str() ;
           std::stringstream output{InstrString};
           
           if(hasLabel)
@@ -207,4 +215,48 @@ std::array <Instructions *, 2> createPair(std::array<std::string, 2> InstrPairSt
    return result;
 }
 
+// empty File Constructor For situation where no file is provided
+FileHelper::FileHelper()
+     :FilePath{""}
+{
+}
 
+
+// Constructor For situation where File location ahs been specified
+FileHelper::FileHelper(const std::string & filepath)
+     : FilePath{filepath}, newLineCount{0} {
+          FileHelper::input.open(FileHelper::FilePath);
+          if(!FileHelper::input)
+               {
+                    std::cerr << "File could not be opened";
+                    exit(EXIT_FAILURE);
+               }
+          FileHelper::input.seekg(0,  std::ios::end );
+          FileHelper::End_OF_File = FileHelper::input.tellg();
+          FileHelper::input.seekg(0);
+     }
+
+ 
+ void FileHelper::readFile()  {
+     
+     std::string someString;
+     FileHelper::input.seekg(newLineCount);
+     int LineCount{0};
+     while(std::getline(FileHelper::input, someString) && LineCount < 5){
+          
+          InstructionQueue.push_back(someString);
+          ++LineCount;
+               FileHelper::newLineCount =  std::streampos( FileHelper::input.tellg() );
+          std::cout << someString << std::endl;
+     }
+     std::cout << std::endl  << std::endl << std::endl << "Read 5 Lines" << std::endl << std::endl << std::endl; 
+ }
+
+ 
+ std::streampos FileHelper::getnewLineCount() const {
+      return FileHelper::newLineCount;
+ }
+
+ std::streampos FileHelper::getEnd_OF_File() const{
+      return FileHelper::End_OF_File;
+ }

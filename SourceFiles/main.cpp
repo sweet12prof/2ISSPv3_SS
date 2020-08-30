@@ -5,7 +5,7 @@
 #include <array>
 #include <algorithm>
 #include <string>
-std::vector<std::string>  InstructionQueue{
+std::vector<std::string>  InstructionQueues{
      //"anotherlabel : J label",
      "mfc $2 $3",
      "someotherlabel : addi $4 $2 2890", 
@@ -24,34 +24,47 @@ std::vector<std::string>  InstructionQueue{
 
 int main()
 {
-     int i{0};
-     std::string nopInstr{"nop"};
-     std::string Instr2;
+//      int i{0};
+//      std::string nopInstr{"nop"};
+//      std::string Instr2;
 
-    while( i < InstructionQueue.size()){
-         Instr2 = ( i == InstructionQueue.size() - 1 ? nopInstr : InstructionQueue.at(i));
-         std::array <Instructions *, 2> res  = createPair ({
-                    InstructionQueue.at(i), 
-                    Instr2
-         });
+//      //FileHelper helper;
 
-         Scheduler Schd{res.at(0), res.at(1)};
+//     while( i < InstructionQueue.size()){
+//          Instr2 = ( i == InstructionQueue.size() - 1 ? nopInstr : InstructionQueue.at(i));
+//          std::array <Instructions *, 2> res  = FileHelper::createPair ({
+//                     InstructionQueue.at(i), 
+//                     Instr2
+//          });
 
-          if(Schd.schedulePair().size() == 3 )
-               ++i;
-          else 
-             i+=2;
+//          Scheduler Schd{res.at(0), res.at(1)};
 
-          int k{0};
+//           if(Schd.schedulePair().size() == 3 )
+//                ++i;
+//           else 
+//              i+=2;
 
-          for(auto item : Schd.schedulePair()){
-               if( k < 2)
-               std::cout << item << std::endl;
-               ++k;
+//           int k{0};
+
+//           for(auto item : Schd.schedulePair()){
+//                if( k < 2)
+//                std::cout << item << std::endl;
+//                ++k;
                
+//           }
+               
+//     }
+          
+          std::string path{"mips1.asm"};
+          FileHelper fileproc{path};
+         
+          while(fileproc.getnewLineCount() != -1) {
+               fileproc.readFile();
           }
                
-    }
+            
+          
+          
 }
 
 
