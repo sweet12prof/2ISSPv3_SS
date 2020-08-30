@@ -16,6 +16,7 @@ std::vector<std::string>  InstructionQueue{
      "someLabel     :       add $12 $2 $1",
      "lw $3 180($30)", 
      "someLabel: sw $3 180($30)", 
+     "addi $3, $2, 890"
 
 };
 
@@ -24,39 +25,64 @@ std::vector<std::string>  InstructionQueue{
 int main()
 {
      int i{0};
-
-     std::string nop {"nop"};
+     std::string nopInstr{"nop"};
      std::string Instr2;
-          while(i < InstructionQueue.size()){
 
-                Instr2 = ( InstructionQueue.size() -  (i + 1) > 1 ? InstructionQueue.at(i+1) :  nop) ;
-                        
+    while( i < InstructionQueue.size()){
+         Instr2 = ( i == InstructionQueue.size() - 1 ? nopInstr : InstructionQueue.at(i));
+         std::array <Instructions *, 2> res  = createPair ({
+                    InstructionQueue.at(i), 
+                    Instr2
+         });
 
-                    std::array <Instructions *, 2> res =  createPair( 
-                         {
-                              InstructionQueue.at(i),
-                              Instr2
-                         }
-                    );
-     
-                    Scheduler newSchd{res.at(0), res.at(1)};
+         Scheduler Schd{res.at(0), res.at(1)};
 
-                    if(newSchd.schedulePair().size() == 3)
-                         ++i;
-                    else 
-                         i+=2;
+          if(Schd.schedulePair().size() == 3 )
+               ++i;
+          else 
+             i+=2;
 
-                         int k{0};
-                         for( auto item : newSchd.schedulePair()){
-                              if(k < 2){
-                                   std::cout << item << std::endl;
-                                   ++k;
-                              }
-                         }
+          int k{0};
+
+          for(auto item : Schd.schedulePair()){
+               if( k < 2)
+               std::cout << item << std::endl;
+               ++k;
                
           }
+               
+    }
 }
 
 
  
+//  int i{0};
 
+//      std::string nop {"nop"};
+//      std::string Instr2;
+//           while(i < InstructionQueue.size()){
+
+//                 Instr2 = ( InstructionQueue.size() -  (i + 1) > 1 ? InstructionQueue.at(i+1) :  nop) ;
+//                     std::array <Instructions *, 2> res =  createPair( 
+//                          {
+//                               InstructionQueue.at(i),
+//                               Instr2
+//                          }
+//                     );
+     
+//                     Scheduler newSchd{res.at(0), res.at(1)};
+
+//                     if(newSchd.schedulePair().size() == 3)
+//                          ++i;
+//                     else 
+//                          i+=2;
+
+//                          int k{0};
+//                          for( auto item : newSchd.schedulePair()){
+//                               if(k < 2){
+//                                    std::cout << item << std::endl;
+//                                    ++k;
+//                               }
+//                          }
+               
+//           }
