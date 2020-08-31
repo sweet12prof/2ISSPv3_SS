@@ -4,10 +4,12 @@ someotherlabel: addi $4 $2 2890
 nop
 beq $4 $1 jLabel
 nop
-sub $5 $3 $1
+sub $12 $3 $1
 jLabel: addi $3 $4 1
 mfc $3 $5
-someLabel: add $12 $2 $1
+nop
+someLabel: add $3 $2 $1
+nop
 lw $3 180($30)
 nop
 someLabel: sw $3 180($30)

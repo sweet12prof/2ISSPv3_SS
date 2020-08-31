@@ -224,7 +224,7 @@ FileHelper::FileHelper()
 
 // Constructor For situation where File location ahs been specified
 FileHelper::FileHelper(const std::string & filepath)
-     : FilePath{filepath}, newLineCount{0} {
+     : FilePath{filepath}, newLineCount{0}, outstandingFlag{false}, outstandingInstruction{""} {
           FileHelper::input.open(FileHelper::FilePath);
           if(!FileHelper::input)
                {
@@ -234,6 +234,7 @@ FileHelper::FileHelper(const std::string & filepath)
           FileHelper::input.seekg(0,  std::ios::end );
           FileHelper::End_OF_File = FileHelper::input.tellg();
           FileHelper::input.seekg(0);
+          FileHelper::input.close();
 
      }
 
@@ -242,13 +243,20 @@ FileHelper::FileHelper(const std::string & filepath)
  std::vector < std::string > FileHelper::readFile()  {
      std::vector < std::string > InstructionQueue; //Vector to hold our Chunk of Lines
      std::string someString; // Variable to hold current read Line
+     FileHelper::input.open(FileHelper::FilePath);
      FileHelper::input.seekg(newLineCount); // Seek our next location to read from
      int LineCount{0};   // Variable to keep count of the lines read
-     while(std::getline(FileHelper::input, someString) && LineCount < 15){ 
+     if(FileHelper::outstandingFlag == true) // Check if previous chunk has an outstanding instruction      
+          {
+               InstructionQueue.push_back(FileHelper::outstandingInstruction); // push outstanding instruction First into the qeue for parsing
+               ++LineCount;
+          }
+     FileHelper::outstandingFlag = false;
+     while(std::getline(FileHelper::input, someString) && LineCount < 6){ 
           InstructionQueue.push_back(someString); // Store read string 
           ++LineCount; // Increment count
                FileHelper::newLineCount =  std::streampos( FileHelper::input.tellg() ); // Save next position
-         // std::cout << someString << std::endl; // Clear this out soon
+        //  std::cout << std::endl << newLineCount << std::endl; // Clear this out soon
      }
      input.close();
      return InstructionQueue;
@@ -273,9 +281,17 @@ std::vector <std::string> FileHelper::schedulePairs( std::vector<std::string>  I
      std::string nopInstr{"nop"};
      std::string Instr2;
      std::vector <std::string> result; // Contains results from scheduler
+     //FileHelper::outstandingFlag = false;
 
      while( i < InstructionQueue.size()){
-               Instr2 = ( (i == InstructionQueue.size() - 1) ? nopInstr : InstructionQueue.at(i + 1)); // Check if we are at the end of queue with only one instrruction left, if so make second of pair nop
+              if (i == InstructionQueue.size() - 1) { // Check if we are at the end of queue with only one instrruction left, if so make second of pair nop
+                   FileHelper::outstandingFlag = true;
+                   FileHelper::outstandingInstruction = InstructionQueue.at(i);
+                    break;
+              } 
+              
+               Instr2 =  InstructionQueue.at(i + 1); 
+
                std::array <Instructions *, 2> res  = FileHelper::createPair ({  //Create pair i.e Instruction representing corresponding parsed string
                               InstructionQueue.at(i),  // First instruction in the pair(from qeue)
                               Instr2                   // Second in qeuee...will be nop when there's no second instruction in the pair
@@ -323,10 +339,13 @@ void FileHelper::writeScheduleResults(const std::vector <std::string > & results
  std::vector <std::string> FileHelper::fileProcess(const std::string & filePath){
        std::vector <std::string> result;
        std::vector<std::string>  InstructionQueues;
+       std::vector<std::string>  preResult;
 
-          while( FileHelper::getnewLineCount() != -1) {
+          while( FileHelper::getnewLineCount() >= 0) {
                 InstructionQueues = FileHelper::readFile();
-                result = FileHelper::schedulePairs(InstructionQueues);  
+                preResult = FileHelper::schedulePairs(InstructionQueues);  
+
+                result.insert(result.end(), preResult.begin(), preResult.end());
           }
 
           return result;

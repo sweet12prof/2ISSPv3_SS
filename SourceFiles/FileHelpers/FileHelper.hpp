@@ -65,6 +65,11 @@
 
              //File stream(output) to write results
              std::ofstream output;
+
+             //
+             bool outstandingFlag;
+
+             std::string outstandingInstruction;
     };
 
 
