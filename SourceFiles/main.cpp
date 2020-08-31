@@ -29,14 +29,11 @@ int main()
           std::vector<std::string>  InstructionQueues;
           std::string path{"mips1.asm"};
           FileHelper fileproc{path};
-         
-          while(fileproc.getnewLineCount() != -1) {
-                InstructionQueues = fileproc.readFile();
-                result = fileproc.schedulePairs(InstructionQueues);
-              
-          }
-                std::copy(result.cbegin(), result.cend(), output);
-                fileproc.writeScheduleResults(result);
+
+          result = fileproc.fileProcess(path);
+          
+          std::copy(result.cbegin(), result.cend(), output);
+          fileproc.writeScheduleResults(result);
             
           
           

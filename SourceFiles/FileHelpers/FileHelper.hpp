@@ -47,6 +47,9 @@
             //Functionto Write Scheduled Pairs to File
             void   writeScheduleResults(const std::vector <std::string > &);
 
+            // Function to Carry out all subroutines related to scheduling and Assembly translation
+            std::vector<std::string> fileProcess(const std::string & filePath);
+
         private :
              // this represents the path of the File containing the instructions (text)
              std::string FilePath;

@@ -318,3 +318,16 @@ void FileHelper::writeScheduleResults(const std::vector <std::string > & results
 
       FileHelper::output.close();
  }
+
+
+ std::vector <std::string> FileHelper::fileProcess(const std::string & filePath){
+       std::vector <std::string> result;
+       std::vector<std::string>  InstructionQueues;
+
+          while( FileHelper::getnewLineCount() != -1) {
+                InstructionQueues = FileHelper::readFile();
+                result = FileHelper::schedulePairs(InstructionQueues);  
+          }
+
+          return result;
+ }
