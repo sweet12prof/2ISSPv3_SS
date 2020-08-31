@@ -25,8 +25,8 @@ std::vector<std::string> Scheduler::schedulePair(){
             result =  Scheduler::Exp_asInstr_1(); // This can be found im ./_as_Insr_ directory
         break;
 
-        default :
-            result =  Scheduler::nop_Instr();      // This can be found im ./_as_Insr_ directory
+        // default :
+        //     result =  Scheduler::nop_Instr();      // This can be found im ./_as_Insr_ directory
    }
 
    return result;

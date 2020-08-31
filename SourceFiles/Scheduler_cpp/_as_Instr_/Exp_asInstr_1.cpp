@@ -1,4 +1,5 @@
 #include "../../../Headers/Scheduler_hpp/Scheduler.hpp"
+#include <iostream>
 std::vector<std::string> Scheduler::Exp_asInstr_1(){ 
     Exp_Instructions * i1 = dynamic_cast<Exp_Instructions *>(Scheduler::Instrpair.first);
     std::vector<std::string> result;
@@ -6,7 +7,7 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
 
         case Instructions::InstrType::R_Type : {
             R_Instruction * i2 = dynamic_cast< R_Instruction *>(Scheduler::Instrpair.second);
-            if(i1->getRd() == i2->getRs() || i1->getRd() == i2->getRt() || i1->getRd() == i2->getRd()){
+            if( (i1->getRd() == i2->getRs()) || (i1->getRd() == i2->getRt()) || (i1->getRd() == i2->getRd()) ){
                 result = {
                             i1->MachineCodeString(Instructions::machineFormat::S_tring), 
                             Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
@@ -18,6 +19,7 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
                             i1->MachineCodeString(Instructions::machineFormat::S_tring), 
                             i2->MachineCodeString(Instructions::machineFormat::S_tring)
                 };
+               // std::cout << "Here";
         }
         break;
 

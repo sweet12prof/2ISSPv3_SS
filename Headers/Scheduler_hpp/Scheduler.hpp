@@ -4,6 +4,10 @@
 #include "../IM_hpp/J_instrClass.hpp"
 #include "../IM_hpp/R_instrClass.hpp"
 #include "../IM_hpp/nopInstruction.hpp"
+
+#ifndef SCHED_H
+#define SCHED_H
+
 class Scheduler{
     
     private:
@@ -20,3 +24,5 @@ class Scheduler{
 
 
 };
+
+#endif

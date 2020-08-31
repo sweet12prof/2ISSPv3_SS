@@ -234,29 +234,87 @@ FileHelper::FileHelper(const std::string & filepath)
           FileHelper::input.seekg(0,  std::ios::end );
           FileHelper::End_OF_File = FileHelper::input.tellg();
           FileHelper::input.seekg(0);
+
      }
 
- 
- void FileHelper::readFile()  {
-     
-     std::string someString;
-     FileHelper::input.seekg(newLineCount);
-     int LineCount{0};
-     while(std::getline(FileHelper::input, someString) && LineCount < 5){
-          
-          InstructionQueue.push_back(someString);
-          ++LineCount;
-               FileHelper::newLineCount =  std::streampos( FileHelper::input.tellg() );
-          std::cout << someString << std::endl;
+
+//Reading Lines from File (to be used in parsing) 
+ std::vector < std::string > FileHelper::readFile()  {
+     std::vector < std::string > InstructionQueue; //Vector to hold our Chunk of Lines
+     std::string someString; // Variable to hold current read Line
+     FileHelper::input.seekg(newLineCount); // Seek our next location to read from
+     int LineCount{0};   // Variable to keep count of the lines read
+     while(std::getline(FileHelper::input, someString) && LineCount < 15){ 
+          InstructionQueue.push_back(someString); // Store read string 
+          ++LineCount; // Increment count
+               FileHelper::newLineCount =  std::streampos( FileHelper::input.tellg() ); // Save next position
+         // std::cout << someString << std::endl; // Clear this out soon
      }
-     std::cout << std::endl  << std::endl << std::endl << "Read 5 Lines" << std::endl << std::endl << std::endl; 
+     input.close();
+     return InstructionQueue;
  }
 
- 
+
+// Return position where the next chunk of Lines will be read from 
  std::streampos FileHelper::getnewLineCount() const {
       return FileHelper::newLineCount;
  }
 
+
+// Returns Location of Last character in File
  std::streampos FileHelper::getEnd_OF_File() const{
       return FileHelper::End_OF_File;
+ }
+
+  //Function to Determine Dependencies between Instrunctions in an Instruction Queue
+std::vector <std::string> FileHelper::schedulePairs( std::vector<std::string>  InstructionQueue) {
+     
+     int i{0};
+     std::string nopInstr{"nop"};
+     std::string Instr2;
+     std::vector <std::string> result; // Contains results from scheduler
+
+     while( i < InstructionQueue.size()){
+               Instr2 = ( (i == InstructionQueue.size() - 1) ? nopInstr : InstructionQueue.at(i + 1)); // Check if we are at the end of queue with only one instrruction left, if so make second of pair nop
+               std::array <Instructions *, 2> res  = FileHelper::createPair ({  //Create pair i.e Instruction representing corresponding parsed string
+                              InstructionQueue.at(i),  // First instruction in the pair(from qeue)
+                              Instr2                   // Second in qeuee...will be nop when there's no second instruction in the pair
+               });
+
+               Scheduler Schd{res.at(0), res.at(1)}; //Scheduler Object instantiation; to be used to schedule the references to instruction objects specified in the argument list
+               
+              // result = Schd.schedulePair();
+
+               if(Schd.schedulePair().size() == 3 ) // check if the scheduler suggests a dependency between the references
+                  {
+                        ++i; // If true our next pair starts from(has as first instruction) last of the current pair 
+                  } 
+               else 
+                    i+=2; // Next pair in normal order
+
+               int k{0};
+
+               for(auto item : Schd.schedulePair()){
+                    if( k < 2){
+                        result.push_back(item);
+                    }              
+                    ++k;
+                    
+              }
+
+              
+          }
+           return result;
+
+}
+
+void FileHelper::writeScheduleResults(const std::vector <std::string > & results){
+      FileHelper::output.open("scheduleRes.asm", std::ios::out);
+     int i{0};
+      while( i < results.size()){
+           output << results.at(i) << std::endl;
+           ++i;
+      }
+
+      FileHelper::output.close();
  }
