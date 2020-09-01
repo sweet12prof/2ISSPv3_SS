@@ -1,11 +1,9 @@
 mfc $2 $3
 nop
 someotherlabel: addi $4 $2 2890
-nop
-beq $4 $1 jLabel
-nop
 sub $12 $3 $1
 jLabel: addi $3 $4 1
+nop
 mfc $3 $5
 nop
 someLabel: add $3 $2 $1

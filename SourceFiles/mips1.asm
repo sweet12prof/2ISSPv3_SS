@@ -1,6 +1,9 @@
 mfc $2 $3
 someotherlabel : addi $4 $2 2890
-beq $4 $1 jLabel
+
+
+
+
 sub $12 $3 $1
 jLabel : addi $3 $4 1
 mfc $3 $5
