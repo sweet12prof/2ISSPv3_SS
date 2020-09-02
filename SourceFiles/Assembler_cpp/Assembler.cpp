@@ -87,8 +87,7 @@ void Assembler::RemoveWhiteSpace(){
         else 
             for(auto item : postWhiteSpace)
                 output << item << std::endl;
-        
-        
+              
 }
 
 
@@ -138,8 +137,6 @@ std::stringstream Assembler::parseString(std::string & someString ){
                     case ',' :
                     break;
 
-
-                    
                     default: 
                     {
                                token += item;
