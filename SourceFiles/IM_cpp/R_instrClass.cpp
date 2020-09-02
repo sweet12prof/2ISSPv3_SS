@@ -56,7 +56,7 @@ std::string R_Instruction::MachineCodeString(Instructions::machineFormat some) c
     else if (some == machineFormat::S_tring){
             std::stringstream output;
             output << std::dec
-                   << (R_Instruction::getLabel() != "" ?   (R_Instruction::getLabel() + ": ") : "") 
+                   << (R_Instruction::getLabel() != "" ?   (R_Instruction::getLabel() + " " ) : "") 
                    << (R_Instruction::getopCodeString() )
                    << " $"  
                    << std::bitset<5>(R_Instruction::getRd()).to_ulong()

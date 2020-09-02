@@ -3,48 +3,18 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "C/C++: g++.exe build active file",
-            "command": "C:\\MinGW\\bin\\g++.exe",
+            "label": "C/C++: g++ build active file",
+            "command": "/opt/rh/devtoolset-9/root/usr/bin/g++",
             "args": [
                 "-g",
-                "-std=c++2a",
-                "${workspaceFolder}\\SourceFiles\\IM_cpp\\Exp_InstrClass.cpp",
-                "${workspaceFolder}\\SourceFiles\\IM_cpp\\I_instrClass.cpp",
-                "${workspaceFolder}\\SourceFiles\\IM_cpp\\J_instrClass.cpp",
-                "${workspaceFolder}\\SourceFiles\\IM_cpp\\R_instrClass.cpp",
-                "${workspaceFolder}\\SourceFiles\\IM_cpp\\RI_instrClass.cpp",
-                "${workspaceFolder}\\SourceFiles\\IM_cpp\\Instr_BaseClass.cpp",
-                "${workspaceFolder}\\SourceFiles\\IM_cpp\\nopInstruction.cpp",
-                "${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\Scheduler.cpp",
-                "${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\I_asInstr_1.cpp",
-                "${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\R_as_Instr1.cpp",
-                "${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\J_as_Instr1.cpp",
-                "${workspaceFolder}\\SourceFiles\\Scheduler_cpp\\_as_Instr_\\Exp_asInstr_1.cpp",
-                "${workspaceFolder}\\SourceFiles\\main.cpp",
-                "${workspaceFolder}\\SourceFiles\\FileHelpers\\FileHelper.cpp",
+                "${workspaceFolder}/SourceFiles/IM_cpp/*.cpp",
+                "${workspaceFolder}/SourceFiles/Scheduler_cpp/*.cpp",
+                "${workspaceFolder}/SourceFiles/Scheduler_cpp/_as_Instr_/*.cpp",
+                "${workspaceFolder}/SourceFiles/main.cpp",
+                "${workspaceFolder}/SourceFiles/FileHelpers/FileHelper.cpp",
+                "${workspaceFolder}/SourceFiles/Assembler_cpp/**.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "type": "shell",
-            "label": "C/C++: cpp.exe build active file",
-            "command": "C:\\MinGW\\bin\\cpp.exe",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

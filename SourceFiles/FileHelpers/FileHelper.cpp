@@ -1,5 +1,6 @@
-#include "./FileHelper.hpp"
+#include "../../Headers/FileHelper_hpp/FileHelper.hpp"
 #include <iostream>
+
 
 std::array <R_Instruction, 2> schd_R_Instr;
 std::array <I_Instruction, 2> schd_I_Instr;
@@ -20,7 +21,7 @@ std::stringstream FileHelper::parseString(std::string someString){
       int i{0};
 
       // set has label vto false before starting parse
-      hasLabel = false;
+      //hasLabel = false;
 
       // iterate through every character in string  to parse
      for(auto item : someString)
@@ -29,7 +30,7 @@ std::stringstream FileHelper::parseString(std::string someString){
                     case ':' :
                          hasLabel = true;
                          if(token != "")
-                              result << (token + " ");
+                              result << (token + ": ");
                          token = "";
                    break; 
 
@@ -54,6 +55,7 @@ std::stringstream FileHelper::parseString(std::string someString){
 
                     case ',' :
                     break;
+
 
                     
                     default: 
@@ -253,9 +255,13 @@ FileHelper::FileHelper(const std::string & filepath)
           }
      FileHelper::outstandingFlag = false;
      while(std::getline(FileHelper::input, someString) && LineCount < 6){ 
-          InstructionQueue.push_back(someString); // Store read string 
-          ++LineCount; // Increment count
+          if(someString != "\n" && someString != "\0")
+          {
+               InstructionQueue.push_back(someString); // Store read string 
+               ++LineCount; // Increment count
                FileHelper::newLineCount =  std::streampos( FileHelper::input.tellg() ); // Save next position
+          }
+               
         //  std::cout << std::endl << newLineCount << std::endl; // Clear this out soon
      }
      input.close();

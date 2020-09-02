@@ -1,54 +1,21 @@
 {
     "configurations": [
         {
-            "name": "Win32",
-            "includePath": [],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64/cl.exe",
-            "cStandard": "c11",
-            "cppStandard": "c++20",
-            "intelliSenseMode": "msvc-x64"
-        },
-        {
-            "name": "newConf",
+            "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${vcpkgRoot}/x86-windows/include"
+                "${workspaceFolder}/Headers/FileHelper_hpp/**",
+                "${workspaceFolder}/Headers/IM_hpp/**",
+                "${workspaceFolder}/Headers/Scheduler_hpp/**",
+                "${workspaceFolder}/Headers/Assembler_hpp/**"
             ],
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
+                
             ],
-            "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64/cl.exe",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "msvc-x64"
-        },
-        {
-            "name": "Another12",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${vcpkgRoot}/x86-windows/include",
-                "${workspaceFolder}/Headers/IM_hpp",
-                "${workspaceFolder}/Headers/Scheduler_hpp"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64/cl.exe",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "msvc-x64"
+            "compilerPath": "/opt/rh/devtoolset-9/root/usr/bin/g++",
+            "cStandard": "gnu18",
+            "intelliSenseMode": "gcc-x64",
+            "cppStandard": "c++20"
         }
     ],
     "version": 4

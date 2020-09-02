@@ -1,5 +1,5 @@
-#include "../../Headers/IM_hpp/all_Instr.hpp"
-#include "../../Headers/Scheduler_hpp/Scheduler.hpp"
+#include "../IM_hpp/all_Instr.hpp"
+#include "../Scheduler_hpp/Scheduler.hpp"
 #include <array>
 #include <vector>
 #include <fstream>
