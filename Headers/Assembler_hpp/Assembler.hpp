@@ -5,6 +5,7 @@
 #include <unordered_map>
 
 #include "../FileHelper_hpp/FileHelper.hpp"
+#include "../IM_hpp/all_Instr.hpp"
 
 
 #ifndef ASSEMBLER_H
@@ -25,9 +26,16 @@ class Assembler{
 
         std::vector < std::string> readFile();
         std::ifstream inputFile;
-        void RemoveWhiteSpace();
+
+        // It registers any instruction Labels and removes them from the instruction string 
+        std::string PostParseProcess(std::string ); 
+        
+        //Formats instruction strings read from File into convinient form.
         static std::stringstream parseString(std::string &);
 
+
+        //Create an Instruction object depending on the op in the string received from the postParseProcess
+        Instructions * CreateInstructionObject(const std::string &);
        
     private:
         std::string filepath;

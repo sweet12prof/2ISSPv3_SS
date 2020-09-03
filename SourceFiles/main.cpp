@@ -26,9 +26,9 @@
 int main()
 {
         //   std::ostream_iterator <std::string> output {std::cout, "\n"};
-        //   std::vector <std::string> result;
+          std::vector <std::string> result;
         //   std::vector<std::string>  InstructionQueues;
-           std::string path{"mips1.asm"};
+          std::string path{"mips1.asm"};
         //   FileHelper fileproc{path};
 
         //   result = fileproc.fileProcess(path);

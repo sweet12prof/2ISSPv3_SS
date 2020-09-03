@@ -21,7 +21,7 @@ std::stringstream FileHelper::parseString(std::string someString){
       int i{0};
 
       // set has label vto false before starting parse
-      //hasLabel = false;
+      hasLabel = false;
 
       // iterate through every character in string  to parse
      for(auto item : someString)
@@ -30,7 +30,7 @@ std::stringstream FileHelper::parseString(std::string someString){
                     case ':' :
                          hasLabel = true;
                          if(token != "")
-                              result << (token + ": ");
+                              result << (token + " ");
                          token = "";
                    break; 
 

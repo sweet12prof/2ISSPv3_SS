@@ -58,7 +58,7 @@ std::string I_Instruction::MachineCodeString(machineFormat some) const {
 
             else 
                 output  << std::dec
-                        << (I_Instruction::getLabel() != "" ?   (I_Instruction::getLabel() + " ") : "")
+                        << (I_Instruction::getLabel() != "" ?   (I_Instruction::getLabel() + ": ") : "")
                         << (I_Instruction::getopCodeString() + " ")
                         << "$" 
                         <<  ( streamrt2.str() + " ")
