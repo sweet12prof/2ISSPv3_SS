@@ -91,20 +91,57 @@ std::array <Instructions *, 2> FileHelper::createPair(std::array<std::string, 2>
                
                output.str("");
                output.str(InstrString);
-
+               
                switch(Instructions::getInstrType2(op))
                {
                     case Instructions::InstrType::R_Type :
                          {
+                              
                               if(hasLabel){
                                    output >> label >>  op >> rd >> rs >> rt; 
-                                   schd_R_Instr.at(i).createR_Instruction(op,  rs, rt, rd,  0, label);
-                                   result.at(i) = &schd_R_Instr.at(i);
+                                   switch(R_Instruction::getRType_Type(op) ){
+                                        case R_Instruction::R_Type::def_R_Type : 
+                                             schd_R_Instr.at(i).createR_Instruction(op,  rs, rt, rd,  0, label);
+                                             result.at(i) = &schd_R_Instr.at(i);
+                                        break; 
+
+                                        case R_Instruction::R_Type::Jr_Type :
+                                             schd_R_Instr.at(i).createR_Instruction(op,  rs, 0, 0,  0, label);
+                                             result.at(i) = &schd_R_Instr.at(i);
+                                        break; 
+
+                                        case R_Instruction::R_Type::Imm_R_Type :
+                                             schd_R_Instr.at(i).createR_Instruction(op,  0, rt, rd,  rs, label);
+                                             result.at(i) = &schd_R_Instr.at(i);
+                                        break;
+
+                                        default :
+                                             throw std::invalid_argument("R-Type Type Op does not exist");
+
+                                   }
                               }
                               else {
                                    output >> op >> rd >> rs >> rt; 
-                                   schd_R_Instr.at(i).createR_Instruction(op, rs, rt, rd, 0, "");
-                                   result.at(i) = &schd_R_Instr.at(i);
+                                   switch(R_Instruction::getRType_Type(op) )
+                                        {
+                                             case R_Instruction::R_Type::def_R_Type : 
+                                                  schd_R_Instr.at(i).createR_Instruction(op,  rs, rt, rd,  0, "");
+                                                  result.at(i) = &schd_R_Instr.at(i);
+                                             break; 
+
+                                             case R_Instruction::R_Type::Jr_Type :
+                                                  schd_R_Instr.at(i).createR_Instruction(op,  rs, 0, 0,  0, "");
+                                                  result.at(i) = &schd_R_Instr.at(i);
+                                             break; 
+
+                                             case R_Instruction::R_Type::Imm_R_Type :
+                                                  schd_R_Instr.at(i).createR_Instruction(op,  0, rt, rd,  rs, "");
+                                                  result.at(i) = &schd_R_Instr.at(i);
+                                             break;
+                                             
+                                             default :
+                                             throw std::invalid_argument("Rtype Type Op does not exist");
+                                        }
                               }
                          }
                     break;
@@ -290,12 +327,14 @@ std::vector <std::string> FileHelper::schedulePairs( std::vector<std::string>  I
      //FileHelper::outstandingFlag = false;
 
      while( i < InstructionQueue.size()){
-              if (i == InstructionQueue.size() - 1) { // Check if we are at the end of queue with only one instrruction left, if so make second of pair nop
+              if (i == InstructionQueue.size() - 1 && newLineCount != -1) { // Check if we are at the end of queue with only one instrruction left, if so make second of pair nop
                    FileHelper::outstandingFlag = true;
                    FileHelper::outstandingInstruction = InstructionQueue.at(i);
                     break;
               } 
-              
+              else if(i == InstructionQueue.size() - 1 && newLineCount == -1)
+               Instr2 = nopInstr;
+               else 
                Instr2 =  InstructionQueue.at(i + 1); 
 
                std::array <Instructions *, 2> res  = FileHelper::createPair ({  //Create pair i.e Instruction representing corresponding parsed string

@@ -128,20 +128,20 @@ std::string Assembler::PostParseProcess(std::string item){
               return restofString;
 }
 
-Instructions * CreateInstructionObject(const std::string & instrString){
-    std::stringstream instrStream{instrString};
-    std::string op;
-    instrStream >> op;
-    instrStream.str("");
-    instrStream.str(instrString);
+// Instructions * CreateInstructionObject(const std::string & instrString){
+//     std::stringstream instrStream{instrString};
+//     std::string op;
+//     instrStream >> op;
+//     instrStream.str("");
+//     instrStream.str(instrString);
 
-    std::string op;
-    int rs, rt, rd, shamt, funct;
+//     std::string op;
+//     int rs, rt, rd, shamt, funct;
 
-    switch(Instructions::getInstrType2(op))
-        {
-            case Instructions::InstrType::R_Type : 
+//     // switch(Instructions::getInstrType2(op))
+//     //     {
+//     //         case Instructions::InstrType::R_Type : 
 
-        }
+//     //     }
 
-}
+// }

@@ -113,5 +113,6 @@ std::map < std::string, std::pair <int, int > > Instructions::varInstr2 = {
         {"nop", {6, 0}}, 
         {"beq", {2, 15}} ,
         {"lw", {2, 13}}, 
-        {"sw", {2, 5}}
+        {"sw", {2, 5}}, 
+        {"jr", {1, 13}}
     };

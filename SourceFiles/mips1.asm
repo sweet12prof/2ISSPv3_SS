@@ -1,6 +1,5 @@
 mfc $2 $3
 
-
 someotherlabel: addi $4 $2 2890
 
 
@@ -12,9 +11,10 @@ jLabel                    :                     addi $3 $4 1
 
 
 mfc $3 $5
-someLabel     :       add $3 $2 $1
+someLabel     :       add $1 $2 $1
 
 
-lw                      $3 180($30)
+lw                      $4 180($30)
 someLabel: sw $3 180($30) 
 addi $3, $2, 890
+jr $12

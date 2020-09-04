@@ -46,6 +46,7 @@ R_Instruction::R_Instruction(const std::string & op, const int & rs, const int &
     R_Instruction::setFunct(op);
     R_Instruction::setShamt(shamt);
     R_Instruction::setRd(rd);
+    R_Instruction::setRType(op);
 }
 
 
@@ -55,15 +56,38 @@ std::string R_Instruction::MachineCodeString(Instructions::machineFormat some) c
         return returnString;
     else if (some == machineFormat::S_tring){
             std::stringstream output;
-            output << std::dec
-                   << (R_Instruction::getLabel() != "" ?   (R_Instruction::getLabel() + ": " ) : "") 
-                   << (R_Instruction::getopCodeString() )
-                   << " $"  
-                   << std::bitset<5>(R_Instruction::getRd()).to_ulong()
-                   << " $"  
-                   << std::bitset<5>(R_Instruction::getRs()).to_ulong()
-                   << " $"  
-                   << std::bitset<5>(R_Instruction::getRt()).to_ulong();
+            if(R_Instruction::rType_Type == R_Instruction::R_Type::def_R_Type) {
+                 output << std::dec
+                        << (R_Instruction::getLabel() != "" ?   (R_Instruction::getLabel() + ": " ) : "") 
+                        << (R_Instruction::getopCodeString() )
+                        << " $"  
+                        << std::bitset<5>(R_Instruction::getRd()).to_ulong()
+                        << " $"  
+                        << std::bitset<5>(R_Instruction::getRs()).to_ulong()
+                        << " $"  
+                        << std::bitset<5>(R_Instruction::getRt()).to_ulong();
+            }
+                   
+            else if(R_Instruction::rType_Type == R_Instruction::R_Type::Jr_Type){
+                output << std::dec
+                        << (R_Instruction::getLabel() != "" ?   (R_Instruction::getLabel() + ": " ) : "") 
+                        << (R_Instruction::getopCodeString() )
+                        << " $"  
+                        << std::bitset<5>(R_Instruction::getRs()).to_ulong();
+            }
+                     
+            else {
+                    output << std::dec
+                        << (R_Instruction::getLabel() != "" ?   (R_Instruction::getLabel() + ": " ) : "") 
+                        << (R_Instruction::getopCodeString() )
+                        << " $"  
+                        << std::bitset<5>(R_Instruction::getRd()).to_ulong()
+                        << " $"  
+                        << std::bitset<5>(R_Instruction::getRt()).to_ulong()
+                        << " $"  
+                        << std::bitset<5>(R_Instruction::getShamt()).to_ulong();
+            }
+                    
                  return output.str();
              }
     else {
@@ -87,5 +111,42 @@ void  R_Instruction::createR_Instruction(const std::string & op, const int & rs,
     R_Instruction::setShamt(shmt);
     R_Instruction::setRt(rt);
     R_Instruction::setInstrType(op);
+    R_Instruction::setRType(op);
 }
 
+
+std::map <std::string, int> R_Instruction::R_Types_map_struc = {
+        {"add", 3},
+        {"and", 3},
+        {"or", 3},
+        {"sub", 3},
+        {"slt", 3},
+        {"jr", 1},
+        {"sll", 2}, 
+        {"srl", 2}
+};
+
+
+R_Instruction::R_Type R_Instruction::getRType() const {
+    return R_Instruction::rType_Type;
+}
+
+void R_Instruction::setRType(const std::string & op){
+    auto p = R_Instruction::R_Types_map_struc.find(op);
+
+    if(p == R_Instruction::R_Types_map_struc.end())
+        throw std::invalid_argument("Undefined R-Type Type Operation");
+    else 
+        R_Instruction::rType_Type = (R_Instruction::R_Type) (p->second);
+
+}
+
+
+R_Instruction::R_Type R_Instruction::getRType_Type(const std::string & op) {
+      auto p = R_Instruction::R_Types_map_struc.find(op);
+
+    if(p == R_Instruction::R_Types_map_struc.end())
+        throw std::invalid_argument("Undefined R-Type Type Operation");
+    else
+        return static_cast< R_Instruction::R_Type > (p->second);
+}

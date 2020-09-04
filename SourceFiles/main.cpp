@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <string>
 #include <iterator>
+#include <stdexcept>
 // std::vector<std::string>  InstructionQueues;{
 //      //"anotherlabel : J label",
 //      "mfc $2 $3",
@@ -25,20 +26,26 @@
 
 int main()
 {
-        //   std::ostream_iterator <std::string> output {std::cout, "\n"};
+          std::ostream_iterator <std::string> output {std::cout, "\n"};
           std::vector <std::string> result;
-        //   std::vector<std::string>  InstructionQueues;
+          std::vector<std::string>  InstructionQueues;
           std::string path{"mips1.asm"};
-        //   FileHelper fileproc{path};
+          FileHelper fileproc{path};
 
-        //   result = fileproc.fileProcess(path);
+          try{
+              result = fileproc.fileProcess(path);
+          }
+          catch(std::exception &ex){
+              std::cout << ex.what();
+          }
+              
           
-        //   std::copy(result.cbegin(), result.cend(), output);
-        //   fileproc.writeScheduleResults(result);
+          std::copy(result.cbegin(), result.cend(), output);
+          fileproc.writeScheduleResults(result);
 
-        Assembler assembler{path};
+        // Assembler assembler{path};
 
-        assembler.RemoveWhiteSpace();    
+        //assembler.RemoveWhiteSpace();    
           
           
 }
