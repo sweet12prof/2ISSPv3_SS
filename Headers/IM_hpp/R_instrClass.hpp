@@ -20,6 +20,9 @@ class R_Instruction : public RI_Instruction{
         R_Instruction();
         R_Instruction(const std::string &, const int &, const int &, const int &, const int &, const std::string &);
         virtual ~R_Instruction() = default;
+
+    ///
+        enum class R_Type { Jr_Type=1, Imm_R_Type, def_R_Type};
     //-----------------------------------
          // accessors and mutators for rs
         std::string getRd() const;
