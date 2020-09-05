@@ -9,13 +9,22 @@
                 "${workspaceFolder}/Headers/Scheduler_hpp/**",
                 "${workspaceFolder}/Headers/Assembler_hpp/**"
             ],
-            "defines": [
-                
-            ],
+            "defines": [],
             "compilerPath": "/opt/rh/devtoolset-9/root/usr/bin/g++",
             "cStandard": "gnu18",
             "intelliSenseMode": "gcc-x64",
             "cppStandard": "c++20"
+        },
+        {
+            "name": "Linux_Fedora",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c18",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "gcc-x64"
         }
     ],
     "version": 4

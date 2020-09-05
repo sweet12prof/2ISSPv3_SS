@@ -17,4 +17,5 @@ someLabel     :       add $1 $2 $1
 lw                      $4 180($30)
 someLabel: sw $3 180($30) 
 addi $3, $2, 890
+add $12, $2, $1
 jr $12

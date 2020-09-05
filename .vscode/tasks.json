@@ -22,6 +22,29 @@
             "problemMatcher": [
                 "$gcc"
             ],
+            "group": "build"
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: g++ build active file(Linux Fedora)",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-g",
+                "${workspaceFolder}/SourceFiles/IM_cpp/*.cpp",
+                "${workspaceFolder}/SourceFiles/Scheduler_cpp/*.cpp",
+                "${workspaceFolder}/SourceFiles/Scheduler_cpp/_as_Instr_/*.cpp",
+                "${workspaceFolder}/SourceFiles/main.cpp",
+                "${workspaceFolder}/SourceFiles/FileHelpers/FileHelper.cpp",
+                "${workspaceFolder}/SourceFiles/Assembler_cpp/Assembler.cpp",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true

@@ -10,5 +10,5 @@ lw $4 180($30)
 nop
 someLabel: sw $3 180($30)
 addi $2 $3 890
-jr $3
-nop
+jr $2
+add $12 $2 $1

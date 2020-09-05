@@ -8,20 +8,51 @@ std::vector<std::string> Scheduler::R_asInstr_1(){
       
         case Instructions::InstrType::R_Type:
            {
-                
-                R_Instruction * Instr2_derivedPtr = dynamic_cast<R_Instruction *>(Instrpair.second);
-                if( (Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRs()) || (Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRt()) || 
-                        (Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRd()) )
-                    result = std::vector<std::string>{
+               if(Instr1_derivedPtr->getRType() == R_Instruction::R_Type::Jr_Type)
+               {
+                   R_Instruction * Instr2_derivedPtr = dynamic_cast<R_Instruction *>(Instrpair.second);
+                   result = std::vector<std::string>{
                                 Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring), 
                                 Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
                                 Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
                             };
-                else 
-                     result = std::vector<std::string>{
-                                Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring),  
-                                Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
-                            };
+               }
+
+               else {
+                        R_Instruction * Instr2_derivedPtr = dynamic_cast<R_Instruction *>(Instrpair.second);
+
+                        if(Instr2_derivedPtr->getRType() == R_Instruction::R_Type::Jr_Type){
+                            if(Instr1_derivedPtr->getRd() != Instr2_derivedPtr->getRs())
+                                    result = std::vector<std::string>{
+                                                Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring),
+                                                Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
+                                            };
+                                else 
+                                    result = std::vector<std::string>{
+                                        Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                        Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                        Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
+                                    };
+                            }
+
+                        else {
+                                
+                                    if( (Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRs()) || (Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRt()) || 
+                                            (Instr1_derivedPtr->getRd() == Instr2_derivedPtr->getRd()) )
+                                        result = std::vector<std::string>{
+                                                    Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                                    Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                                    Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
+                                                };
+                                    else 
+                                        result = std::vector<std::string>{
+                                                    Instr1_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring),  
+                                                    Instr2_derivedPtr->MachineCodeString(Instructions::machineFormat::S_tring)
+                                                };
+                                    }
+                    }
+                
+                
            }
         break;
 
