@@ -45,7 +45,11 @@ int main()
 
         // Assembler assembler{path};
 
-        //assembler.RemoveWhiteSpace();    
+        //assembler.RemoveWhiteSpace();    \
+
+        std::string someNum = "12837a47440a";
+
+        std::cout  << std::endl << std::boolalpha << FileHelper::is_A_Number(someNum) << std::endl;
           
           
 }

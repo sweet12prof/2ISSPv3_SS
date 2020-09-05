@@ -50,6 +50,9 @@
             // Function to Carry out all subroutines related to scheduling and Assembly translation
             std::vector<std::string> fileProcess(const std::string & filePath);
 
+            //Function to detect if a string is completely a number 
+            static bool is_A_Number(const std::string &);
+
         private :
              // this represents the path of the File containing the instructions (text)
              std::string FilePath;

@@ -395,3 +395,14 @@ void FileHelper::writeScheduleResults(const std::vector <std::string > & results
 
           return result;
  }
+
+
+bool FileHelper::is_A_Number(const std::string & numString){
+     if(numString.size() == 1 && std::isdigit(numString.front()))
+          return true;
+
+     if (std::isdigit(numString.front()))
+          return true && is_A_Number(numString.substr(1, numString.npos));
+     else 
+          return false;
+}
