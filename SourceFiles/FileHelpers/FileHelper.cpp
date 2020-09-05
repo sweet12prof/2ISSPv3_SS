@@ -106,7 +106,7 @@ std::array <Instructions *, 2> FileHelper::createPair(std::array<std::string, 2>
                                         break; 
 
                                         case R_Instruction::R_Type::Jr_Type :
-                                             schd_R_Instr.at(i).createR_Instruction(op,  rs, 0, 0,  0, label);
+                                             schd_R_Instr.at(i).createR_Instruction(op,  rd, 0, 0,  0, label);
                                              result.at(i) = &schd_R_Instr.at(i);
                                         break; 
 
@@ -130,7 +130,7 @@ std::array <Instructions *, 2> FileHelper::createPair(std::array<std::string, 2>
                                              break; 
 
                                              case R_Instruction::R_Type::Jr_Type :
-                                                  schd_R_Instr.at(i).createR_Instruction(op,  rs, 0, 0,  0, "");
+                                                  schd_R_Instr.at(i).createR_Instruction(op,  rd, 0, 0,  0, "");
                                                   result.at(i) = &schd_R_Instr.at(i);
                                              break; 
 
@@ -177,7 +177,7 @@ std::array <Instructions *, 2> FileHelper::createPair(std::array<std::string, 2>
                                                   result.at(i) = &schd_I_Instr.at(i) ;
                                              }
                                              else {
-                                                  output >> op >> rs >> rt >> Imm;
+                                                  output >> op >> rt>> rs >> Imm;
                                                   schd_I_Instr.at(i).createI_Instruction(op, rs, rt, Imm, "", "");
                                                   result.at(i) =  &schd_I_Instr.at(i);
                                              }

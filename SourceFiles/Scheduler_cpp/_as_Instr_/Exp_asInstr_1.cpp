@@ -7,18 +7,37 @@ std::vector<std::string> Scheduler::Exp_asInstr_1(){
 
         case Instructions::InstrType::R_Type : {
             R_Instruction * i2 = dynamic_cast< R_Instruction *>(Scheduler::Instrpair.second);
-            if( (i1->getRd() == i2->getRs()) || (i1->getRd() == i2->getRt()) || (i1->getRd() == i2->getRd()) ){
-                result = {
-                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
-                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
-                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
-                };
+            
+            if(i2->getRType() == R_Instruction::R_Type::Jr_Type)
+            {
+                if(i1->getRd() != i2->getRs())
+                         result = {
+                                        i2->MachineCodeString(Instructions::machineFormat::S_tring),
+                                        i1->MachineCodeString(Instructions::machineFormat::S_tring)                                        
+                                    };
+
+                else    
+                        result = {
+                                    i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                    Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                    i2->MachineCodeString(Instructions::machineFormat::S_tring)
+                                };
             }
-            else 
-                result = {
-                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
-                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
-                };
+
+            else {
+                       if( (i1->getRd() == i2->getRs()) || (i1->getRd() == i2->getRt()) || (i1->getRd() == i2->getRd()) ){
+                                result = {
+                                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                            Instructions::nopInstruction(Instructions::machineFormat::S_tring), 
+                                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
+                                };
+                            }
+                        else 
+                                result = {
+                                            i1->MachineCodeString(Instructions::machineFormat::S_tring), 
+                                            i2->MachineCodeString(Instructions::machineFormat::S_tring)
+                                };
+                }  
                // std::cout << "Here";
         }
         break;
