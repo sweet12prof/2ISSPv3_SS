@@ -32,7 +32,7 @@ std::string NOP_Instruction::MachineCodeString(Instructions::machineFormat some)
         case Instructions::machineFormat::Decimal :
             {
                 std::stringstream Output;
-                Output << std::hex << std::showbase << std::bitset<6>(NOP_Instruction::getOpcode()) <<  std::bitset<26>(NOP_Instruction::getOtherBits());
+                Output << "0x" << "00000000";
                 FinalResult = Output.str();
             }
         break;         

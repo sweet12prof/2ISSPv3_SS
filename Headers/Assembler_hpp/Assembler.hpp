@@ -11,14 +11,6 @@
 #ifndef ASSEMBLER_H
 #define ASSEMBLER_H
 
-static std::streampos endLocation;
-static std::streampos currentPoint;
-static int globalLineCount{0};
-static std::unordered_map <std::string, int> textSegmentTable;
-static std::unordered_map <std::string, int> DataSegmentTable;
-static bool hasLabel2;
-
-
 class Assembler{
     public:
         Assembler();
@@ -36,10 +28,26 @@ class Assembler{
 
         //Create an Instruction object depending on the op in the string received from the postParseProcess
         Instructions * CreateInstructionObject(const std::string &);
+        
+        //Instruction Finds the address of supplied string
+        static int getTextLabelAddress(const std::string &); 
+
+        //Accessor for current point 
+        std::streampos getCurrentpoint() const;
+
+        // Translate Instruction Object to machineCode
+        std::string Translate(Instructions * , Instructions::machineFormat );
+
+        // Store Results 
+        void Assemble(const std::string &);
+        
        
     private:
         std::string filepath;
-        
+         std::streampos endLocation;
+         std::streampos currentPoint = 0;
+         
+         
 };
 
 #endif

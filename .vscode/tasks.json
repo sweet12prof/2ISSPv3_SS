@@ -7,6 +7,7 @@
             "command": "/opt/rh/devtoolset-9/root/usr/bin/g++",
             "args": [
                 "-g",
+                "-std=c++2a",
                 "${workspaceFolder}/SourceFiles/IM_cpp/*.cpp",
                 "${workspaceFolder}/SourceFiles/Scheduler_cpp/*.cpp",
                 "${workspaceFolder}/SourceFiles/Scheduler_cpp/_as_Instr_/*.cpp",

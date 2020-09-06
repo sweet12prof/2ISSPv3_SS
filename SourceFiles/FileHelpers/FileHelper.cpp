@@ -373,7 +373,10 @@ void FileHelper::writeScheduleResults(const std::vector <std::string > & results
       FileHelper::output.open("scheduleRes.asm", std::ios::out);
      int i{0};
       while( i < results.size()){
-           output << results.at(i) << std::endl;
+           if(i != results.size() - 1)
+               output << results.at(i) << std::endl;
+           else 
+               output << results.at(i);
            ++i;
       }
 

@@ -43,7 +43,7 @@ std::string Instructions::MachineCodeString(machineFormat some) const {
       if (some == Instructions::machineFormat::S_tring)
         {
             std::stringstream stream;
-            stream << (Instructions::getLabel() != "" ?   (Instructions::getLabel() + " ") : "");
+            stream << (Instructions::getLabel() != "" ?   (Instructions::getLabel() + ": ") : "");
             stream << (Instructions::getopCodeString() + " ");
             return stream.str();  
         } 
