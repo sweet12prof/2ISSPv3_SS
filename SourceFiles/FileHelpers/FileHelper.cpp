@@ -265,9 +265,10 @@ FileHelper::FileHelper()
 FileHelper::FileHelper(const std::string & filepath)
      : FilePath{filepath}, newLineCount{0}, outstandingFlag{false}, outstandingInstruction{""} {
           FileHelper::input.open(FileHelper::FilePath);
+     //std::cout << "Path is " << FileHelper::FilePath;
           if(!FileHelper::input)
                {
-                    std::cerr << "File could not be opened";
+                    std::cerr << "File could not be opened Here";
                     exit(EXIT_FAILURE);
                }
           FileHelper::input.seekg(0,  std::ios::end );

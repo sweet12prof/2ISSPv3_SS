@@ -38,9 +38,18 @@ class Assembler{
         // Translate Instruction Object to machineCode
         std::string Translate(Instructions * , Instructions::machineFormat );
 
+    
+        //This translates to the user specified base, output is used in storing to file
+        std::string Translate_To_MachineRepresentation(Instructions *  ,Instructions::machineFormat );
+
         // Store Results 
-        void Assemble(const std::string &);
+         void Assemble(Instructions::machineFormat);
         
+        // Function to process Segments 
+        static void processSegments(const std::string &);
+
+        //Function to process Data Segment
+        void processDataSegment();
        
     private:
         std::string filepath;

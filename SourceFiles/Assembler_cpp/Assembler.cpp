@@ -60,6 +60,9 @@ std::stringstream Assembler::parseString(std::string & someString ){
                     case ',' :
                     break;
 
+                    case '.':
+                    break;
+
                     default: 
                     {
                                token += item;
@@ -79,25 +82,13 @@ Assembler::Assembler(){}
 Assembler::Assembler(const std::string & path)
     :filepath{path}
 {
-    Assembler::inputFile.open(Assembler::filepath, std::ios::in);
-    if(!Assembler::inputFile)
-        {
-            std::cerr << "\nThe file could not be opened";
-            exit(EXIT_FAILURE);
-        }
-    else {
-            Assembler::inputFile.close();
-            Assembler::inputFile.seekg(0, std::ios::end);
-            Assembler::endLocation = Assembler::inputFile.tellg();
-            Assembler::inputFile.close();
-    }
     currentPoint = 0;
         
 }
 
 
 std::vector < std::string> Assembler::readFile(){
-    Assembler::inputFile.open(Assembler::filepath, std::ios::in);
+    Assembler::inputFile.open("/home/sweet12prof/Desktop/Final/2ISSPv3_SS/SourceFiles/scheduleRes.asm", std::ios::in);
     Assembler::inputFile.seekg(currentPoint);
     int lineCount{0};
     std::string lineString;
@@ -287,9 +278,19 @@ std::string Assembler::Translate(Instructions * instr ,Instructions::machineForm
     return  output.str();
 }
 
+std::string Assembler::Translate_To_MachineRepresentation(Instructions * instr ,Instructions::machineFormat format){
+    std::stringstream output;
+        output  << std::setw(8) 
+                << std::left
+                << instr->MachineCodeString(format); 
+    return  output.str();
+}
 
-void Assembler::Assemble(const std::string & path){
-    std::ofstream OutputFile {"Output.txt", std::ios::out};
+
+void Assembler::Assemble( Instructions::machineFormat format){
+    std::ofstream OutputFile {"Output/log.txt", std::ios::out};
+    std::ofstream machineOutput{"Output/Binaries.txt", std::ios::out};
+    std::vector <std::string> machineFormatResult;
 
     std::cout << std::endl;
     std::cout   << std::left  
@@ -303,9 +304,9 @@ void Assembler::Assemble(const std::string & path){
 
     std::vector <std::string> result;
     std::vector<std::string>  InstructionQueues;
-    FileHelper fileproc{path};
+    FileHelper fileproc{Assembler::filepath};
       try{
-              result = fileproc.fileProcess(path);
+              result = fileproc.fileProcess(Assembler::filepath);
           }
           catch(std::exception &ex){
               std::cout << ex.what();
@@ -319,13 +320,119 @@ void Assembler::Assemble(const std::string & path){
                     std::string output = Assembler::Translate (Assembler::CreateInstructionObject ( Assembler::PostParseProcess( Assembler::parseString(item).str() ) ), Instructions::machineFormat::Decimal );
                     std::cout << output << std::endl;
                     OutputFile << output << std::endl;
-
+                    std::string machineFormatOutput = Assembler::Translate_To_MachineRepresentation(Assembler::CreateInstructionObject(Assembler::PostParseProcess( Assembler::parseString(item).str() ) ), format);
+                    machineFormatResult.push_back(machineFormatOutput);
                 }
                 catch(std::invalid_argument ex)
                     {
                         std::cout << ex.what() << std::endl;
                     }               
                 }
+        std::cout << std::endl;
+        //std::cout << std::endl << "Output written to file: " << OutputFile.;
         OutputFile.close();
 
+        for(auto item : machineFormatResult){
+            machineOutput << item << std::endl;
+        }
+            machineOutput.close();
 }
+
+
+
+  void Assembler::processSegments(const std::string & path){
+    std::ifstream inputFile;
+    std::ofstream outputFile;
+    std::string line;
+    std::vector <std::string > dataSection;
+    std::vector <std::string> textSection;
+    
+    bool isDataSection;
+    bool set = false;
+
+        inputFile.open(path, std::ios::in);
+        if(!inputFile)
+            std::cerr << "File Could not be opened Here2";
+        else 
+            {
+                while(std::getline(inputFile, line)){
+                    if(line == ".data"){
+                        isDataSection = true;
+                        set = true;
+                    }
+                        
+                    else if(line == ".text")
+                        {
+                            isDataSection = false;
+                            set = true;
+                        }
+                    else 
+                    {
+                        if (set == true && line != "\0")
+                        {
+                            if(isDataSection == true)
+                                dataSection.push_back(line);
+                            else 
+                                textSection.push_back(line);
+                        }
+
+                    }
+                }
+                inputFile.close();
+            }
+
+        outputFile.open("Output/textSection.txt", std::ios::out);
+        if(int i{0}; !outputFile)
+            std::cerr << "Could not create File";
+        else {
+            for (auto item : textSection){
+                if(i != textSection.size() - 1)
+                    outputFile << item << std::endl;
+                else 
+                    outputFile << item;
+                ++i;
+            }
+                
+        }
+        outputFile.close();
+
+        outputFile.open("Output/dataSection.txt", std::ios::out);
+        if(!outputFile)
+            std::cerr << "Could not create File";
+        else {
+            for (auto item : dataSection)
+                outputFile << item << std::endl;
+        }
+        outputFile.close();
+
+
+  }
+
+  void Assembler::processDataSegment(){
+     
+      std::vector <std::string> data;
+      std::string line;
+      std::ifstream inputFile{"/home/sweet12prof/Desktop/Final/2ISSPv3_SS/SourceFiles/Output/dataSection.txt", std::ios::in}; 
+      if(!inputFile){
+            std::cerr << "File could not be opened";
+            exit(EXIT_FAILURE);
+      }
+      else {
+                while(std::getline(inputFile, line) && line != "\0")
+                {
+                    data.push_back(Assembler::parseString(line).str());
+                }
+      }
+       
+  }
+
+//   void parseString2(const std::string someString){
+//       int tokencount{0};
+//       for(int i{0}; i < someString.size(); ++i){
+//           if(i = ' ')
+//           {
+//               if(tokencount == 0)
+//               ++tokencount;
+//           }
+//       }
+//   }
